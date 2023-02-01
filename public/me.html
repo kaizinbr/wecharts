@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="resources/css/index.css">
+    <link rel="stylesheet" href="resources/css/loader.css">
+    <link rel="stylesheet" href="resources/css/main.css">
+    <link rel="stylesheet" href="resources/css/user.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <title>wecharts - Seu próprio chart de música!</title>
+</head>
+<body>
+    
+    <div class="loader ">
+        <div class="loading">
+            <span class="blob1 blob"></span>
+            <span class="blob2 blob"></span>
+            <span class="blob3 blob"></span>
+        </div>
+    </div>
+    
+    <header class="header">
+        <nav class="navbar">            
+            <div class="logo">
+                <h1 id="logo"><a href="/">wecharts</a></h1>
+            </div>
+            <div class="user">
+            </div>
+        </nav>
+    </header>
+
+    <div class="menu hide">
+        <a href="/me">Seu perfil</a>
+        <a href="/">Home</a>
+        <a href="/" class="logout">Sair</a>
+    </div>
+
+
+    <main>
+        <div class="profile-bg">
+            <img src="resources/img/cover placeholder.png" alt="wecharts">
+        </div>
+        <div class="profile">
+            <div class="profile-pic">
+                <span class="product premium">Premium</span>
+                <figure class="gradient">
+                    <img src="https://i.scdn.co/image/ab6775700000ee8569c00cf76879b3bf33e4d6a3" alt="">
+                </figure>
+                <span class="username">Kaizin</span>
+            </div>
+        </div>
+        <div class="dashboard">
+                <h2>Seu Painel</h2>
+                <div class="library">
+                    <div class="items">
+                        <h4 class="default-text">Você tem:</h4>
+                        <span class="number-of-items"></span>
+                        <h5 class="sub-text">Músicas salvas</h5>
+                        <div class="items-box">
+                            <div class="item" id="last">
+                                <figure>
+                                    <img src="resources/img/cover placeholder.png" alt="wecharts">
+                                </figure>
+                            </div>
+
+                            <div class="item" id="first">
+                                <figure>
+                                    <img src="resources/img/cover placeholder.png" alt="wecharts">
+                                </figure>
+                            </div>
+                                
+                           
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="items albums">
+                        <h4 class="default-text">Você tem:</h4>
+                        <span class="number-of-items"></span>
+                        <h5 class="sub-text">Álbuns salvos</h5>
+                        <div class="items-box">
+                            <div class="item" id="last">
+                                <figure>
+                                    <img src="resources/img/cover placeholder.png" alt="wecharts">
+                                </figure>
+                            </div>
+
+                            <div class="item" id="first">
+                                <figure>
+                                    <img src="resources/img/cover placeholder.png" alt="wecharts">
+                                </figure>
+                            </div>
+                                
+                           
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="items artists">
+                        <h4 class="default-text">Você segue:</h4>
+                        <span class="number-of-items"></span>
+                        <h5 class="sub-text">Artistas</h5>
+                    </div>
+
+                    <hr>
+                    <div class="items danceability">
+                        <div class="items-box">
+                            <div class="item info-box">
+                                <h2 class="box-title">Dançabilidade</h2>
+                                <div class="piechart" id="danceability"></div>
+                                <div class="chart-subtitle">
+                                    <div class="d-yes">
+                                        
+                                    </div>
+                                    <div class="d-no">
+                                        
+                                    </div>
+                                </div>
+                                    
+                            </div>
+                            <div class="item info box">
+                                <h4 class="box-title"></h4>
+                                <p class="box-subtitle"></p>
+                                <p class="explain">Danceability describes how suitable a track is for dancing based on a combination of musical elements including tempo, rhythm stability, beat strength, and overall regularity. A value of 0.0 is least danceable and 1.0 is most danceable.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="items energy">
+                        <div class="items-box">
+                            <div class="item info-box">
+                                <h2 class="box-title">Energia</h2>
+                                <div class="piechart" id="energy"></div>
+                                <div class="chart-subtitle">
+                                    <div class="d-yes">
+                                        <div class="label"></div>
+                                        <p></p>
+                                    </div>
+                                    <div class="d-no">
+                                        <div class="label"></div>
+                                        <p></p>
+                                    </div>
+                                </div>
+                                    
+                            </div>
+                            <div class="item info box">
+                                <h4 class="box-title"></h4>
+                                <p class="box-subtitle"></p>
+                                <p class="explain">Energy is a measure from 0.0 to 1.0 and represents a perceptual measure of intensity and activity. Typically, energetic tracks feel fast, loud, and noisy. For example, death metal has high energy, while a Bach prelude scores low on the scale. Perceptual features contributing to this attribute include dynamic range, perceived loudness, timbre, onset rate, and general entropy.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </main>
+
+
+    <script type="module" src="resources/js/app.js"></script>
+    <script type="module">
+
+        import App from './resources/js/app.js';
+
+        // const urlParams = new URLSearchParams(window.location.search);
+        //pega o access_token no cookie
+        var access_token = document.cookie
+        if (access_token === '' || access_token === null) {
+            window.location.href = '/';
+        }
+
+        access_token = access_token
+        .split('; ')
+        .find(row => row.startsWith('access_token='))
+        .split('=')[1];  
+        console.log(access_token); 
+
+        async function putBackground(){
+            const url = 'https://api.spotify.com/v1/me/top/tracks?time_range=short_term&offset=0&limit=1';
+
+            const config = {
+                method: 'get',
+                headers: { 'Authorization': 'Bearer ' + access_token },
+                json: true
+            };
+
+            const user = await (await fetch(url, config)).json();
+
+            const imgUrl = user.items[0].album.images[0].url;
+            const img = document.querySelector('.profile-bg img');
+            img.src = imgUrl
+        }
+
+        let total;
+
+        async function getSavedTrack(offset){
+
+            const url = `https://api.spotify.com/v1/me/tracks?offset=${offset}&limit=1`;
+
+            const config = {
+                method: 'get',
+                headers: { 'Authorization': 'Bearer ' + access_token },
+                json: true
+            };
+
+
+            const saved = await (await fetch(url, config)).json();
+            total = saved.total;
+            console.log(saved);
+            console.log('total é: ', total);
+            console.log('offset é: ', saved.offset);
+
+            return saved.items[0].track;
+        
+        }
+
+
+        async function putTracks(){
+            const last = await getSavedTrack(0);
+            const first = await getSavedTrack(total - 1);
+
+            console.log(last);
+
+            const itemsQtd = document.querySelector('.number-of-items');
+            itemsQtd.textContent = total;
+
+            const firstFig = document.querySelector('#first');
+            const lastFig = document.querySelector('#last');
+
+                
+            lastFig.innerHTML = `
+                <figure>
+                    <span class="figure-text last">Última música salva</span>
+                    <img src="${last.album.images[1].url}" alt="capa de ${last.name} - ${last.artists[0].name}">
+                </figure>
+                <span class="fig-subtitle">${last.name}</span>`;
+
+            firstFig.innerHTML = `
+                <figure>
+                    <span class="figure-text first">Primeira música salva</span>
+                    <img src="${first.album.images[1].url}" alt="capa de ${first.name} - ${first.artists[0].name}">
+                </figure>
+                <span class="fig-subtitle">${first.name}</span>`;
+
+        }
+
+        async function getSavedAlbum(offset){
+
+            const url = `https://api.spotify.com/v1/me/albums?offset=${offset}&limit=1`;
+
+            const config = {
+                method: 'get',
+                headers: { 'Authorization': 'Bearer ' + access_token },
+                json: true
+            };
+
+
+            const saved = await (await fetch(url, config)).json();
+            total = saved.total;
+            console.log(saved);
+            console.log('total é: ', total);
+            console.log('offset é: ', saved.offset);
+
+            return saved.items[0].album;
+
+        }
+
+        async function putAlbums(){
+            const last = await getSavedAlbum(0);
+            const first = await getSavedAlbum(total - 1);
+
+            console.log(last);
+
+            const itemsQtd = document.querySelector('.albums .number-of-items');
+            itemsQtd.textContent = total;
+
+            const firstFig = document.querySelector('.albums #first');
+            const lastFig = document.querySelector('.albums #last');
+
+                
+            lastFig.innerHTML = `
+                <figure>
+                    <span class="figure-text last">Último álbum salvo</span>
+                    <img src="${last.images[1].url}" alt="capa de ${last.name} - ${last.artists[0].name}">
+                </figure>
+                <span class="fig-subtitle">${last.name}</span>`;
+
+            firstFig.innerHTML = `
+                <figure>
+                    <span class="figure-text first">Primeiro álbum salvo</span>
+                    <img src="${first.images[1].url}" alt="capa de ${first.name} - ${first.artists[0].name}">
+                </figure>
+                <span class="fig-subtitle">${first.name}</span>`;
+
+        }
+
+        function renderTopFive(obj){
+            // console.log('obj é tipo: ', typeof obj)
+            if (obj === null || obj === undefined) {
+                console.log('Ocorreu um erro!')
+                return;
+            } else{
+                var num = obj.items.length;
+                App.putTracks(num, obj.items)
+                for (const song of obj.items){
+                    // console.log(song.name);
+                }
+            }
+        }
+
+
+        
+        async function getFollowingArtists(){
+
+            const url = `https://api.spotify.com/v1/me/following?type=artist&limit=50`;
+
+            const config = {
+                method: 'get',
+                headers: { 'Authorization': 'Bearer ' + access_token },
+                json: true
+            };
+
+
+            const saved = await (await fetch(url, config)).json();
+            console.log(saved.artists.total);
+            // total = saved.total;
+            // console.log(saved);
+            // console.log('total é: ', total);
+            // console.log('offset é: ', saved.offset);
+
+            return saved.artists.total;
+
+        }
+
+        async function putArtists(){
+            const total = await getFollowingArtists();
+
+            console.log(total);
+
+            const itemsQtd = document.querySelector('.artists .number-of-items');
+            itemsQtd.textContent = total;
+
+        }
+        await putArtists();
+
+
+        async function putUser() {
+
+            console.log('iniciou');
+            let img;
+            let name;
+            let user_product;
+            let id;
+
+            img = sessionStorage.getItem('profile_pic');
+            name = sessionStorage.getItem('user_name');
+            user_product = sessionStorage.getItem('user_product');
+            id = sessionStorage.getItem('user_id');
+
+            if(img && name && user_product && id){
+                const view = `
+                <div class="pic ${id}">
+                    <figure>
+                        <img src="${img}" alt="${name} profile pic">
+                    </figure>
+                    <span class="user_product ${user_product}">${user_product}</span>
+                </div>`;
+
+                const userDiv = document.querySelector('.user');
+                userDiv.classList.add(id)
+                userDiv.innerHTML = view;
+                return;
+            } else {
+                const config = {
+                    method: 'get',
+                    headers: { 'Authorization': 'Bearer ' + access_token },
+                    json: true
+                };
+
+                const url = `https://api.spotify.com/v1/me`
+
+                const user = await (await fetch(url, config)).json();
+                
+                img = user.images[0].url;
+                name = user.display_name;
+                user_product = user.product;
+                id = user.id;
+
+                sessionStorage.setItem('profile_pic', img);
+                sessionStorage.setItem('user_name', name);
+                sessionStorage.setItem('user_product', user_product);
+                sessionStorage.setItem('user_id', id);
+
+                const view = `
+                <div class="pic ${id}">
+                    <figure>
+                        <img src="${img}" alt="${name} profile pic">
+                    </figure>
+                    <span class="user_product ${user_product}">${user_product}</span>
+
+                </div>`;
+
+                const userDiv = document.querySelector('.user');
+                userDiv.classList.add(id)
+                userDiv.innerHTML = view;
+            }
+            }
+
+        function disableLoader(){
+                const loader = document.querySelector('.loader');
+                loader.classList.add('hidden');
+        }
+
+
+
+
+        function porcentagem(percent, num) {
+            
+            return (num / 100) * percent;
+        }
+
+        let arr = [];
+        async function getAudioFeatures(ids, mode){
+            
+            var config = {
+                headers: { 'Authorization': 'Bearer ' + access_token },
+                json: true
+            };
+
+            const url = `https://api.spotify.com/v1/audio-features?ids=${ids}`
+
+            const audio = await (await fetch(url, config)).json();
+            console.log(audio)
+            var media;
+            console.log(mode)
+
+            if (mode == 'danceability'){
+                media = danceability(audio);
+            } else if (mode == 'energy'){
+                media = energy(audio);
+                console.log('energy')
+            } else{
+                console.log('Ocorreu um erro :/')
+            }
+
+
+            return media;
+        }
+
+        function danceability(obj){
+            let media = 0;
+            for(let i = 0; i < obj.audio_features.length; i++){
+                var num = obj.audio_features[i].danceability;
+                arr.push(num);
+                media += num;
+            }
+            media = (media / obj.audio_features.length);
+
+            console.log('a média real é: ', media);
+            console.log('a média arredondada é: ', media.toFixed(1));
+
+            return media.toFixed(1);
+        }  
+        
+        function energy(obj){
+            let media = 0;
+            for(let i = 0; i < obj.audio_features.length; i++){
+                var num = obj.audio_features[i].energy;
+                console.log(obj.audio_features[i].energy)
+                arr.push(num);
+                media += num;
+            }
+            media = (media / obj.audio_features.length);
+
+            console.log('a média de energia real é: ', media);
+            console.log('a média de energia arredondada é: ', media.toFixed(1));
+
+            return media.toFixed(1);
+        }  
+
+        async function getFiftyItems(){
+            let ids = '';
+            
+            var config = {
+                headers: { 'Authorization': 'Bearer ' + access_token },
+                json: true
+            };
+
+            const short_url = `https://api.spotify.com/v1/me/top/tracks?time_range=short_term&offset=0&limit=50`
+
+            const short_time_tracks = await (await fetch(short_url, config)).json();
+            
+            const items = short_time_tracks.items;
+            for(let i = 0; i < items.length; i++){
+                ids += items[i].id + ',';
+            }
+
+            const long_url = `https://api.spotify.com/v1/me/top/tracks?time_range=long_term&offset=0&limit=50`
+
+            const long_tracks = await (await fetch(short_url, config)).json();
+            
+            const longItems = long_tracks.items;
+            for(let i = 0; i < longItems.length; i++){
+                ids += longItems[i].id + ',';
+            }
+
+            return ids;
+        }
+
+        async function verifyDanceability(idsStr){
+            const pie = document.querySelector('.piechart#danceability');
+            const yes = document.querySelector('.danceability .d-yes');
+            const no = document.querySelector('.danceability .d-no');
+            const title = document.querySelector('.danceability h4.box-title');
+            const subtitle = document.querySelector('.danceability p.box-subtitle');
+
+            const ids = idsStr;
+            const dance = await getAudioFeatures(ids, 'danceability');
+            if (dance <= 0 || dance >= 1 || dance == undefined){
+                console.log('Algo deu errado :(')
+            }else if(dance >= 0.6){
+                const percent = porcentagem(dance * 100, 360);
+                const pStyle = `conic-gradient( #14e0a9 ${percent}deg, #FF4D6D 0)`
+                pie.style.backgroundImage = pStyle;
+
+                const yes_view = `<div class="label"></div>
+                                        <p>${dance * 100}% são dançantes</p>`;
+                const no_view = `<div class="label"></div>
+                                        <p>${Math.trunc((1 - dance) * 100)}% não são dançantes</p>`;
+
+                yes.innerHTML = yes_view;
+                no.innerHTML = no_view;
+
+                title.innerHTML = 'Você gosta de dançar!';
+                subtitle.innerHTML = `Parece que você curte músicas para dançar. <br> ${dance * 100}% das suas músicas são dançantes!`;
+            } else if(dance <= 0.6 && dance >= 0.4){
+                const percent = porcentagem(dance * 100, 360);
+                const pStyle = `conic-gradient( #14e0a9 ${percent}deg, #FF4D6D 0)`
+                pie.style.backgroundImage = pStyle;
+
+                const yes_view = `<div class="label"></div>
+                                        <p>${dance * 100}% são dançantes</p>`;
+                const no_view = `<div class="label"></div>
+                                        <p>${Math.trunc((1 - dance) * 100)}% não são dançantes</p>`;
+
+                yes.innerHTML = yes_view;
+                no.innerHTML = no_view;
+
+                title.innerHTML = 'Você tem um gosto equilibrado!';
+                subtitle.innerHTML = `Parece que você curte tanto músicas para dançar quanto músicas menos dançantes.<br> ${dance * 100}% das suas músicas são dançantes e ${(1 - dance) * 100}% não são dançantes!`;
+            } else{
+                const percent = porcentagem(dance * 100, 360);
+                const pStyle = `conic-gradient( #14e0a9 ${percent}deg, #FF4D6D 0)`
+                pie.style.backgroundImage = pStyle;
+
+                const yes_view = `<div class="label"></div>
+                                        <p>${dance * 100}% são dançantes</p>`;
+                const no_view = `<div class="label"></div>
+                                        <p>${Math.trunc((1 - dance) * 100)}% não são dançantes</p>`;
+
+                yes.innerHTML = yes_view;
+                no.innerHTML = no_view;
+
+                title.innerHTML = 'Você prefere músicas mais calmas!';
+                subtitle.innerHTML = `Parece que você curte mais músicas menos dançantes e mais relaxantes.<br> ${(1 - dance) * 100}% das suas músicas são menos dançantes.`;
+            }
+        }
+
+
+        async function verifyEnergy(idsStr){
+            const pie = document.querySelector('.piechart#energy');
+            const yes = document.querySelector('.energy .d-yes');
+            const no = document.querySelector('.energy .d-no');
+            const title = document.querySelector('.energy h4.box-title');
+            const subtitle = document.querySelector('.energy p.box-subtitle');
+
+            const ids = idsStr;
+            const energy = await getAudioFeatures(ids, 'energy');
+            if (energy <= 0 || energy >= 1 || energy == undefined){
+                console.log('Algo deu errado :(')
+            }else if(energy >= 0.6){
+                const percent = porcentagem(energy * 100, 360);
+                const pStyle = `conic-gradient( #14e0a9 ${percent}deg, #FF4D6D 0)`
+                pie.style.backgroundImage = pStyle;
+
+                const yes_view = `<div class="label"></div>
+                                        <p>${energy * 100}% são energéticas</p>`;
+                const no_view = `<div class="label"></div>
+                                        <p>${Math.round((1 - energy) * 100)}% não são energéticas</p>`;
+
+                yes.innerHTML = yes_view;
+                no.innerHTML = no_view;
+
+                title.innerHTML = 'Você curte músicas com bastante energia!';
+                subtitle.innerHTML = ` ${energy * 100}% das suas músicas são energéticas!`;
+            } else if(energy <= 0.6 && energy >= 0.4){
+                const percent = porcentagem(energy * 100, 360);
+                const pStyle = `conic-gradient( #14e0a9 ${percent}deg, #FF4D6D 0)`
+                pie.style.backgroundImage = pStyle;
+
+                const yes_view = `<div class="label"></div>
+                                        <p>${energy * 100}% são energéticas</p>`;
+                const no_view = `<div class="label"></div>
+                                        <p>${Math.trunc((1 - energy) * 100)}% não são energéticas</p>`;
+
+                yes.innerHTML = yes_view;
+                no.innerHTML = no_view;
+
+                title.innerHTML = 'Você tem um gosto equilibrado!';
+                subtitle.innerHTML = `Parece que você gosta de músicas não muito nem pouco energéticas.<br> ${energy * 100}% das suas músicas são energéticas e ${(1 - energy) * 100}% não são energéticas!`;
+            } else{
+                const percent = porcentagem(energy * 100, 360);
+                const pStyle = `conic-gradient( #14e0a9 ${percent}deg, #FF4D6D 0)`
+                pie.style.backgroundImage = pStyle;
+
+                const yes_view = `<div class="label"></div>
+                                        <p>${energy * 100}% são energéticas</p>`;
+                const no_view = `<div class="label"></div>
+                                        <p>${Math.trunc((1 - energy) * 100)}% não são energéticas</p>`;
+
+                yes.innerHTML = yes_view;
+                no.innerHTML = no_view;
+
+                title.innerHTML = 'Você prefere músicas mais calmas!';
+                subtitle.innerHTML = `Parece que você prefere músicas menos energéticas.<br> ${(1 - energy) * 100}% das suas músicas são menos energéticas.`;
+            }
+        }
+
+
+        async function getData(){
+            const el = document.querySelector('html');
+
+            el.style.overflow = 'hidden';
+            el.style.maxHeight = '100vh';
+
+            await putUser();
+            await putBackground();
+            await putTracks();
+            await putAlbums();
+            await putArtists();
+            const ids = await getFiftyItems();
+            await verifyDanceability(ids);
+            await verifyEnergy(ids);
+
+
+            disableLoader();
+            el.style.overflow = '';
+            el.style.maxHeight = '';
+
+        }
+
+
+        window.onload = getData();
+        
+
+        function logout(){
+            sessionStorage.clear();
+            document.cookie = 'access_token=; max-age=0; path=/';
+            document.cookie = 'user_id=; max-age=0; path=/';
+            window.location.href = '/';
+        }
+
+        const menu = document.querySelector('.menu');
+
+        const logoutBtn = document.querySelector('.logout');
+        logoutBtn.addEventListener('click', logout);
+
+        const user = document.querySelector('.user');
+        user.addEventListener('click', () => {
+            menu.classList.toggle('hide');
+        });
+    </script>
+</body>
+
+</html>

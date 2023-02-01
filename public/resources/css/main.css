@@ -1,0 +1,303 @@
+main .container.top-song {
+    width: 100%;
+    height: 100vw;
+    padding: 1rem;
+    margin: 0 auto;
+    color: var(--background);
+}
+
+main .container.top-song .chart-cover {
+    height: 100%;
+    width: 100%;
+    padding: 1rem;
+    border-radius: 15px;
+    background-image: linear-gradient(135deg, #14E0A9 0%, #0ED5BC 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
+}
+
+main .container.top-song .chart-cover img {
+    width: 220px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.4);;
+}
+
+main .container.top-song h3#your-top-song-is {    
+    font-weight: 900;
+    font-size: 1rem;
+}
+
+main .container.top-song .song-info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    text-align: center;
+}
+
+main .container.top-song h1#song-title,main .container.top-song h1#artist-title {    
+    font-weight: 800;
+    font-size: 40px;
+}
+
+main .container.top-song h2#song-artist {    
+    font-weight: 600;
+    font-size: 24px;
+}
+
+
+main .container .top-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    padding: 20px 1rem;
+    gap: 1.8rem;
+    width: 100%;
+}
+
+.container .top-content h1#info-t{
+    font-weight: 900;
+    font-size: 36px;
+}
+
+.container .top-content p#info-p{
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--light-gray);
+}
+
+.container .select-box{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 0;
+}
+
+.container .select-box button.time-range-btn, button.reload-btn{
+    width: 120px;
+    height: 40px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background-color: var(--card-background);
+    color: var(--light-gray);
+    font-weight: 500;
+    font-size: 14px;
+    padding: 0 1rem;
+    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard Variable", Pretendard, Roboto, "Noto Sans KR", "Segoe UI", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;  
+    
+    outline: none;
+    text-align: center;
+    transition: all .4s ease-in-out;
+}
+
+.container .select-box button.time-range-btn:hover, .container .select-box button.time-range-btn.active, button.reload-btn:hover, button.reload-btn.active{ 
+    background-color: var(--medium-aquamarine);
+    color: var(--background);
+}
+
+.song-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* align-items: center; */
+    gap: 1rem;
+    /* padding: 1rem; */
+    width: 100%;
+}
+
+.song-box div#tbl-box{
+    
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    width: 100%;
+}
+
+.song-box table.songs-table{
+    width: 100%;
+    border-collapse: collapse;
+    border: none;
+    border-spacing: 0;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
+}
+
+.song-box table.songs-table thead th{
+    height: 80px;
+    background-color: var(--card-background);
+    border-bottom: 0.5px solid rgba(167, 167, 167, 0.2);
+    color: var(--light-gray);
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.song-box table.songs-table thead th:nth-child(2){
+    text-align: left;
+    padding-left: 1.5rem;
+}
+
+.song-box table.songs-table tr{
+    height: 80px;
+    background-color: var(--card-background);    
+    border: 0;
+    border-bottom: .7px solid rgba(167, 167, 167, 0.2);
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.song-box table.songs-table tr td{
+    border: none;
+}
+
+
+.song-box table.songs-table tr td:first-child{
+    width: 15%;
+    text-align: center;
+}
+
+.song-box table.songs-table tr td#cover{
+    width: 80px;
+}
+
+.song-box table.songs-table tr td#cover div{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.song-box table.songs-table tr td#infos{
+    padding: 10px 15px;
+}
+
+.song-box table.songs-table tr td#cover img{
+    max-height: 80%;
+    max-width: 80%;
+    border-radius: 8px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+    height: auto;
+    width: auto;
+}
+
+
+.song-box table.songs-table tr td h3.title{
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.song-box table.songs-table tr td h4.singer{
+    font-size: .7rem;
+    font-weight: 400;
+    margin-bottom: 7px;
+}
+
+.song-box table.songs-table tr td h2.played{
+    font-size: .6rem;
+    font-weight: 400;
+}
+
+.controls{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.controls button{
+    height: 45px;
+    width: 45px;
+    padding: 5px;
+    border-radius: 50%;
+}
+
+.create{
+    width: 100%;
+    color: var(--light-gray);
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    justify-content: space-around;
+}
+
+.create label {
+    width: 200px;
+}
+
+.create label input {
+    width: 200px;
+    height: 40px;
+    padding: 7px 10px;
+    background-color: var(--card-background);
+    border-radius: 25px;
+    border: 1px solid var(--border);
+    color: var(--light-gray);
+    transition: all .4s ease-in-out;
+}
+
+.create label input:focus{
+    outline: none;
+    border: 1px solid var(--medium-aquamarine);
+}
+
+.create button#create-playlist-btn {
+    color: var(--light-gray);
+    width: 85px;
+    height: 40px;
+    padding: 7px 20px;
+    background-color: var(--card-background);
+    border-radius: 25px;
+    border: 1px solid var(--border);
+}
+
+ button.access-playlist {
+    color: var(--light-gray);
+    width: auto;
+    height: 40px;
+    padding: 7px 20px;
+    background-color: var(--card-background);
+    border-radius: 25px;
+    border: 1px solid var(--border);
+}
+
+button.access-playlist:active {
+    color: var(--background);
+    width: auto;
+    height: 40px;
+    padding: 7px 20px;
+    background-color: var(--medium-aquamarine);
+    border-radius: 25px;
+    transition: all .4s ease-in-out;
+    border: 1px solid var(--medium-aquamarine);
+}
+
+button.access-playlist:active a{
+    color: var(--background);
+    transition: all .4s ease-in-out;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="resources/css/index.css">
+    <link rel="stylesheet" href="resources/css/main.css">
+    <link rel="stylesheet" href="resources/css/loader.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <title>wecharts - Seu próprio chart de música!</title>
+</head>
+<body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content=
+            "width=device-width, initial-scale=1.0">
+      
+        <title>Pie Chart</title>
+      
+        <style>
+            .piechart {
+                margin-top: 300px;
+                display: block;
+                position: absolute;
+                width: 400px;
+                height: 400px;
+                border-radius: 50%;
+                /* background-image: conic-gradient(
+                    pink 252deg, 
+                    lightblue 0); */
+            }
+      
+            body,
+            .piechart {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <h1>Pie Chart</h1>
+        <div class="piechart"></div>
+    </body>
+
+    <script type="module" src="resources/js/index.js"></script>
+    <script type="module" src="resources/js/logic.js"></script>
+    <script type="module">
+
+        import Index from './resources/js/index.js';
+
+        // const urlParams = new URLSearchParams(window.location.search);
+        //pega o access_token no cookie
+        let access_token = document.cookie
+        .split('; ')
+        .find(row => row.startsWith('access_token='))
+        .split('=')[1];
+        console.log(access_token);
+
+        function porcentagem(percent, num) {
+            
+            return (num / 100) * percent;
+        }
+
+        let arr = [];
+        async function lastPlayed(ids){
+            
+            // const access_token = 'BQA0Xz0vZPvcfJO8iB1SmuVVGgQKeXJALQQvUccUX4wlpMEDxldUAA1mhPPcjBgdo_3Qx_k654qoOuSMUy-u8eHAdasgNMR-QV5mZRm5Te0Kdjdkd8X7vftxNjMwD01Tdj8OitQDo9BwrqzTtasMmV2R1fez72761P60UMmu3yEuqVkMP11VE3bmu1pi_VXFEwaOfivQHfsWS4wNHKRcpj9jpbqmOdVH6K43NUCpP1sku_wCmHjluPnmdEUpj6R8s3Ir-cVgBy_m';
+            // const ids = '65FftemJ1DbbZ45DUfHJXE,27bIik73QCu8Xzt3xpG1bI,1d6xaY4JvvqTWfgCeJAtWa,3r8RuvgbX9s7ammBn07D3W,5vClivCCQDK6sxmL6MhMFc,5iLQEPDtbp74HFz4y7FCuP,4yk0t3ZG8vkoligoo7iAQB,2eJLKy70kIrMC4DWFLrgcC,3XSVvAahOSahEU2Ngxd4OF,1QpwvWMQGdOgA8MXXfgs4H,21aOLk12MksET8AsbU0SI6,0mlxHb4jbPr1PUBUv0WHRS,7F0MuIk5glqtowCUjbn9es,1PSDpiTgnkxHc7GhKrHCaA,1Ym6aMuT5bliaZMC67AmPp,1tjDKrtdCKtVCGEG35jqdI,23XXMK9SQBFwndnbgbcMPa,2gpwaAJnSDTevgZa4uyM0H,3OwliKQmQmrRWwScxN1IVh,4ThzRT9rLkr3XB49QKrUyl,4fsQ0K37TOXa3hEQfjEic1,2WTHLEVjfefbGoW7F3dXIg,37YoRLUu1qId0ewavgvnkG,10qiH1RJkexhTUuN562FsP,1Q4uboZ1EA6G7PqDyljq4E,1Z8TPHiKeCUyClxV6WTTIf,3gFcGnU4kTdMYLXDjH1TK8,4rOODw637hsmsq0uzT0DN3,6Ilm1TWzvn3UaYtlyJajln,6kN3vvzDiVZP2hiPA0ApMd,6sUQqRmOcRyAG5M3EWXzr3,7ixVW7RobslvMrvlzHYLha,13KR2yNRDrbKwR3dOKCDl4,296nXCOv97WJNRWzIBQnoj,2WkPfNd237yc0l5KewCDpp,41GURJxjE5urzLnrw2O2sI,6NnCWIWV740gP7DQ8kqdIE,0dTEMO9G2uu9Vbu3f8Swto,2pIUpMhHL6L9Z5lnKxJJr9,3j0x2BUUtm2obQXS1lZuN3,0RDqNCRBGrSegk16Avfzuq,0iBTjsmnazYc4JUERE7TkK,2gYj9lubBorOPIVWsTXugG,5sbooPcNgIE22DwO0VNGUJ,0L8LOav65XwLjCLS11gNPD,56s2s5e8WuBsWVKnmz6J9L,0SaGCx4UGOp7HoBlClkHqt,0XzHblTGWrJ84cb0Q2ZPqp,0dap7YUNPlUiEPYSA1bRg3,1WODuPG8MLtTbYBEzdoJ7E,'
+            var config = {
+                headers: { 'Authorization': 'Bearer ' + access_token },
+                json: true
+            };
+
+            const url = `https://api.spotify.com/v1/audio-features?ids=${ids}`
+
+            const audio = await (await fetch(url, config)).json();
+            console.log(audio)
+            const media = danceability(audio);
+
+            return media;
+        }
+
+        function danceability(obj){
+            let media = 0;
+            for(let i = 0; i < obj.audio_features.length; i++){
+                // console.log(obj.audio_features[i].danceability);
+                // console.log('media',media)
+                var num = obj.audio_features[i].danceability;
+                arr.push(num);
+                media += num;
+            }
+            media = (media / obj.audio_features.length);
+
+            console.log('a média real é: ', media);
+            console.log('a média arredondada é: ', media.toFixed(1));
+
+            return media.toFixed(1);
+        }        
+
+        async function getFiftyItems(){
+            let ids = '';
+            
+            var config = {
+                headers: { 'Authorization': 'Bearer ' + access_token },
+                json: true
+            };
+
+            const short_url = `https://api.spotify.com/v1/me/top/tracks?time_range=short_term&offset=0&limit=50`
+
+            const short_time_tracks = await (await fetch(short_url, config)).json();
+            
+            const items = short_time_tracks.items;
+            for(let i = 0; i < items.length; i++){
+                ids += items[i].id + ',';
+            }
+
+            const long_url = `https://api.spotify.com/v1/me/top/tracks?time_range=long_term&offset=0&limit=50`
+
+            const long_tracks = await (await fetch(short_url, config)).json();
+            
+            const longItems = long_tracks.items;
+            for(let i = 0; i < longItems.length; i++){
+                ids += longItems[i].id + ',';
+            }
+
+            const result = lastPlayed(ids);
+            return result;
+        }
+
+        async function verifyDanceability(){
+            const pie = document.querySelector('.piechart');
+            const dance = await getFiftyItems();
+            if(dance >= 0.6){
+                const percent = porcentagem(dance * 100, 360);
+                const pStyle = `conic-gradient( #14e0a9 ${percent}deg, #FF4D6D 0)`
+                pie.style.backgroundImage = pStyle;
+
+                // background-image: conic-gradient(
+                //     pink 252deg, 
+                //     lightblue 0);
+
+
+                console.log('a música é dançante');
+                console.log('a dançabilidade é', dance * 100);
+            }else{
+                console.log('a música não é dançante');
+                console.log('a dançabilidade é', (1 - dance) * 100);
+            }
+        }
+
+        verifyDanceability();
+        // const oposite = (1 - dance).toFixed(1);
+        // console.log('a valência é', dance);
+        // console.log('a oposição é', oposite*100);
+    </script>
+</body>
+
+</html>

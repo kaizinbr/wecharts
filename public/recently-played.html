@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="resources/css/index.css">
+    <link rel="stylesheet" href="resources/css/main.css">    
+    <link rel="stylesheet" href="resources/css/loader.css">
+    <link rel="stylesheet" href="resources/css/user.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <title>wecharts - Seu próprio chart de música!</title>
+</head>
+<body>
+
+    
+    <div class="loader">
+        <div class="loading">
+            <span class="blob1 blob"></span>
+            <span class="blob2 blob"></span>
+            <span class="blob3 blob"></span>
+        </div>
+    </div>
+    
+    <header class="header">
+        <nav class="navbar">            
+            <div class="logo">
+                <h1 id="logo"><a href="/">wecharts</a></h1>
+            </div>
+            <div class="user">
+            </div>
+        </nav>
+    </header>
+
+    <div class="menu hide">
+        <a href="/me">Seu perfil</a>
+        <a href="/">Home</a>
+        <a href="/" class="logout">Sair</a>
+    </div>
+
+    <main>
+
+        <div class="container main-content">
+            <div class="top-content">
+                <h1 id="info-t">Reproduções recentes</h1>
+                    <p id="info-p">Músicas reproduzidas recentemente em todos os dispositivos conectados à sua conta.</p>
+                    <button class="reload-btn" id="reload" value="reload">
+                            Atualizar
+                    </button>
+            </div>
+
+            <div class="song-box">
+                <div id="tbl-box">
+                    <table class="songs-table">
+                        <thead>
+                        <tr>
+                            <th colspan="2">Música</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                    
+            </div>
+                    
+        </div>
+
+        
+    </main>
+
+
+    <script type="module" src="resources/js/app.js"></script>
+    <script type="module">
+
+        import App from './resources/js/app.js';
+
+        //pega o access_token no cookie
+        var access_token = document.cookie
+        if (access_token === '' || access_token === null) {
+            window.location.href = '/';
+        }
+
+        access_token = access_token
+        .split('; ')
+        .find(row => row.startsWith('access_token='))
+        .split('=')[1];
+
+        // const main = document.querySelector('main');
+        // const notLogged = document.querySelector('.not-logged');
+
+        // if (access_token === '') {
+        //     main.classList.add('hidden');
+        //     window.location.href = '/';
+        // } {
+        //     main.classList.remove('hidden');
+        //     notLogged.classList.add('hidden');
+        // }
+
+
+
+
+
+
+  
+        console.log(access_token); 
+
+        async function getPlayedSongs(){
+            await putUser();
+            // var time_range = value;
+            const config = {
+                method: 'get',
+                headers: {
+                },
+            };
+        
+            const url = `/index/recently-played`;
+
+            const songs = await (await fetch(url, config)).json();
+
+            renderPlayedSongs(songs);
+            
+            const loader = document.querySelector('.loader');
+            loader.classList.add('hidden');
+
+        }
+
+        function renderPlayedSongs(obj){
+            // console.log('obj é tipo: ', typeof obj)
+            if (obj === null || obj === undefined) {
+                console.log('Ocorreu um erro!')
+                return;
+            } else{
+                var num = obj.items.length;
+                App.putDateTracks(num, obj.items)
+                for (const song of obj.items){
+                    // console.log(song.name);
+                }
+            }
+        }
+
+        async function putUser() {
+
+            console.log('iniciou');
+            let img;
+            let name;
+            let user_product;
+            let id;
+
+            img = sessionStorage.getItem('profile_pic');
+            name = sessionStorage.getItem('user_name');
+            user_product = sessionStorage.getItem('user_product');
+            id = sessionStorage.getItem('user_id');
+
+            if(img && name && user_product && id){
+                const view = `
+                <div class="pic ${id}">
+                    <figure>
+                        <img src="${img}" alt="${name} profile pic">
+                    </figure>
+                    <span class="user_product ${user_product}">${user_product}</span>
+                </div>`;
+
+                const userDiv = document.querySelector('.user');
+                userDiv.classList.add(id)
+                userDiv.innerHTML = view;
+                return;
+            } else {
+                const config = {
+                    method: 'get',
+                    headers: { 'Authorization': 'Bearer ' + access_token },
+                    json: true
+                };
+
+                const url = `https://api.spotify.com/v1/me`
+
+                const user = await (await fetch(url, config)).json();
+                
+                img = user.images[0].url;
+                name = user.display_name;
+                user_product = user.product;
+                id = user.id;
+
+                sessionStorage.setItem('profile_pic', img);
+                sessionStorage.setItem('user_name', name);
+                sessionStorage.setItem('user_product', user_product);
+                sessionStorage.setItem('user_id', id);
+
+                const view = `
+                <div class="pic ${id}">
+                    <figure>
+                        <img src="${img}" alt="${name} profile pic">
+                    </figure>
+                    <span class="user_product ${user_product}">${user_product}</span>
+
+                </div>`;
+
+                const userDiv = document.querySelector('.user');
+                userDiv.classList.add(id)
+                userDiv.innerHTML = view;
+            }
+            }
+
+        const reloadBtn = document.getElementById('reload');
+        console.log(reloadBtn)
+
+
+        reloadBtn.addEventListener('click', () => getPlayedSongs());
+        window.onload = getPlayedSongs();
+
+        function logout(){
+            sessionStorage.clear();
+            document.cookie = 'access_token=; max-age=0; path=/';
+            document.cookie = 'user_id=; max-age=0; path=/';
+            window.location.href = '/';
+        }
+
+        const menu = document.querySelector('.menu');
+
+        const logoutBtn = document.querySelector('.logout');
+        logoutBtn.addEventListener('click', logout);
+
+        const user = document.querySelector('.user');
+        user.addEventListener('click', () => {
+            menu.classList.toggle('hide');
+        });
+
+    </script>
+</body>
+
+</html>

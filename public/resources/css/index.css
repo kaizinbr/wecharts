@@ -1,0 +1,489 @@
+
+@import url('https://fonts.cdnfonts.com/css/gotham');
+/* logo font */
+@import url('https://fonts.cdnfonts.com/css/quantify');
+/* main font --> https://github.com/orioncactus/pretendard */
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css");
+
+
+:root{    
+    font-family: 'Gotham Black', sans-serif;
+    font-family: 'Gotham Light', sans-serif;
+    font-family: 'Gotham Thin', sans-serif;
+    font-family: 'Gotham XLight', sans-serif;
+    font-family: 'Gotham Book', sans-serif;
+    font-family: 'Gotham Ultra', sans-serif;
+    font-family: 'Gotham', sans-serif;
+    /* https://www.cdnfonts.com/gotham.font */
+    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard Variable", Pretendard, Roboto, "Noto Sans KR", "Segoe UI", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+
+    /* CSS HEX */
+    --background: #16202C;
+    --darker-background: #10171E;
+    --op-background: rgba(22, 32, 44, 0.7);
+    --card-background: #24303F;
+    --card-background-2: #2d2d2dff;
+    --card-background-3: #353535ff;
+    --white-text: #dfece9;
+    --light-gray: #cecece;
+    --border: #91aaa466;
+    --medium-aquamarine: #14e0a9ff;
+    --op-medium-aquamarine: rgba(20, 224, 169, 0.519);
+    --turquoise: #0ed5bcff;
+    --border-2: rgba(167, 167, 167, 0.2);
+    /* https://coolors.co/1b1b1b-242424-2d2d2d-353535-cecece-14e0a9-0ed5bc */
+}
+
+::selection{
+    background-color: var(--medium-aquamarine);
+    color: var(--background);
+}
+
+.top-song ::selection{
+    background-color: var(--background);
+    color: var(--medium-aquamarine);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+a{
+    color: var(--light-gray);
+    text-decoration: none;
+}
+
+body {
+    background-color: var(--background);
+    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard Variable", Pretendard, Roboto, "Noto Sans KR", "Segoe UI", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;  
+    color: var(--white-text);
+    padding-top: 80px;
+    scroll-behavior: smooth;
+}
+
+header {
+    height: 80px;
+    width: 100%;
+    box-shadow: 0px 5px 10px 0 rgba(0,0,0,0.2);
+    background-color: var(--op-background);
+    backdrop-filter: blur(20px);
+    position: fixed;
+    top: 0;
+    z-index: 10;
+}
+
+header .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+header .navbar .logo{
+    
+    padding: 1rem;
+}
+
+header .navbar a{
+    text-decoration: none;
+    color: var(--medium-aquamarine);
+}
+
+header .navbar h1#logo {
+    font-family: 'Quantify', sans-serif;
+    font-weight: 400;
+    font-size: 40px;
+    color: var(--medium-aquamarine);
+}
+
+header .navbar span {
+    color: var(--medium-aquamarine);
+}
+
+main {
+    top: 60px;
+}
+
+.playing-box{
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.playing-now {
+    width: 100%;
+    height: 84px;
+    background-color: var(--card-background);
+    border-radius: 15px;
+    border: 1px solid var(--border-2);
+    padding: 1rem;
+
+    display: grid;
+    grid-template-columns: 50px 3fr;
+    column-gap: 1rem;
+}
+
+.playing-now figure img{
+    height: 50px;
+    width: 50px;
+}
+
+.playing-now figure{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.playing-now h3#playing-now{
+    font-size: 10px;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+.playing-now h1#playing-now-title{
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.playing-now h2#playing-now-artist{
+    font-size: 8px;
+    font-weight: 400;
+}
+
+.playing-now .playing-now-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: 52px;
+}
+
+/* Cards principais */
+
+.main-content{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    /* grid-template-columns: 1fr 1fr; */
+    gap: 1rem;
+    padding: 1rem;
+    background-color: var(--darker-background);
+}
+
+.card-link {
+    text-decoration: none;
+    color: var(--white-text);
+}
+
+.main-content .card {
+    width: 180px;
+    height: 220px;
+    border-radius: 12px;
+    align-self: center;
+    background-color: var(--card-background);
+    padding: .5rem;
+    gap: .5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.main-content .card.up-top-artists, .all-content .card.top-tracks{
+    background-color: #0069AB;
+}
+
+.main-content .card.up-top-tracks{
+    background-color: #B5B5B3;
+}
+
+.card.up-top-tracks img, .card.up-recommendations img{
+    border-radius: 8px;
+}
+
+.main-content .card.up-recently-played{
+    background-color: #CAA242;
+}
+
+.main-content .card.up-recommendations{
+    background-color: #032352;
+}
+
+.card .card-header h1{
+    font-size: 1rem;
+    text-align: center;
+}
+
+.card .card-img img {
+    max-width: 100%;
+    filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.4));
+    max-height: 135px;
+}
+
+.card .card-footer{
+    display: flex;
+    justify-content: end;
+    align-items: flex-end;
+    width: 100%;
+    max-height: 20px;
+}
+
+.card .card-footer span{
+    font-size: 5rem;
+    z-index: 5;
+}
+
+
+
+
+
+
+
+
+
+.card.top-artists{
+    background-color: #A06CD5;
+}
+
+.all-content{
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content: center;
+    width: 100%;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+
+.all-content h1{
+    font-size: larger;
+}
+
+.all-content .card{
+    width: 100%;
+    height: 200px;
+    border-radius: 15px;
+    align-self: center;
+    padding: 1.7rem;
+    gap: .5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.all-content .card-header, .all-content .card-footer{
+    width: 100%;
+    justify-content: start;
+    align-items: flex-start;
+    max-height: 80px;
+}
+
+.all-content .card .card-header h2.title{
+    font-size: 1.5rem;
+}
+
+.all-content .card .card-header h3.subtitle{
+    font-size: 14px;
+    color: var(--light-gray);
+    font-weight: 400;
+}
+
+.all-content .card-footer{
+    gap: 1rem;
+}
+
+.all-content .card .card-footer img{
+    height: 80px;
+}
+
+.all-content .card .card-footer span, .card .card-footer p{
+    font-size: 12px;
+}
+
+.all-content .card .card-footer span{
+    background-color: var(--white-text);
+    color: var(--background);
+    padding: 2px 5px;
+}
+
+.all-content .card .card-footer h4{
+    font-size: 14px;
+}
+
+.all-content .card .card-footer .card-infos{
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.all-content .card.genre-msg{
+    width: 100%;
+    height: 250px;
+    border-radius: 0;
+    padding: 1.5rem 0;
+    gap: .5rem;
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.all-content .card.genre-msg .wc-icon{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    /* align-items: flex-start; */
+    height: 100%;
+    gap: 5px;
+}
+
+.all-content .card.genre-msg .wc-icon span.chat-name{
+    font-size: .8rem;
+    font-weight: 500;
+}
+
+.all-content .card.genre-msg .wc-icon img{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.all-content .card.genre-msg .messages{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.all-content .card.genre-msg .messages .message{
+    padding: .7rem 1.2rem;
+    border-radius: 25px;
+    background-color: var(--medium-aquamarine);
+    width: fit-content;
+    color: var(--background);
+    font-size: small;
+    font-weight: 500;
+}
+
+.all-content .card.genre-msg .messages .message p.genre{
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.all-content .card.recently-played{
+    background-color: #ba3434;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Parte caso o usuário não esteja logado */
+
+.hidden {
+    display: none !important;
+}
+
+section.not-logged{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.login-box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 2rem 1.5rem;
+    /* min-height: 400px; */
+    background-color: var(--card-background);
+    border-radius: 15px;
+    border: 0.5px solid rgba(167, 167, 167, 0.2);
+    gap: 30px;
+}
+
+.login-box h1{
+    text-align: center;
+}
+
+.login-box a{
+    text-decoration: none;
+    font-weight: 700;
+    color: var(--background);
+    background-image: linear-gradient(135deg, #14E0A9 0%, #0ED5BC 100%);
+    font-size: 24px;
+    padding: 14px 32px;
+    border-radius: 35px;
+}
+
+.warn-box .warn-title{
+    font-weight: 400;
+    font-size: 16px;
+    color: var(--light-gray);
+    text-align: justify;
+}
+
+.warn-box .warn-q{
+    font-weight: 700;
+    font-size: 1.5rem;
+    text-align: justify;
+    margin: 1rem 0 0.7rem 0;
+}
+
+.warn-box .warn-text{
+    font-weight: 400;
+    font-size: 16px;
+    color: var(--light-gray);
+    text-align: justify;
+}
+
+.warn-box .warn-text a{
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--light-gray);
+    text-align: justify;
+}

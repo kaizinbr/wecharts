@@ -1,0 +1,97 @@
+@token = {{login.response.body.token}}
+@host = http://localhost:8080
+
+### Post Create Curriculum
+POST {{host}}/curriculum
+Content-Type: application/json
+Authorization: bearer {{token}}
+
+{
+  "nome": "Carlos",
+  "idade": "17",
+  "tel": "4002-8922",
+  "email": "carlosandre116@gmail.com",
+  "linkedin": "@jovemcarlosti",
+  "github": "jovemcarlosti",
+  "pais": "Brasil",
+  "estado": "Paraíba",
+  "cidade": "João Pessoa",
+  "nomeArea": "Informática Sofredora",
+  "nomeEspecializacao":"Inglês", 
+  "nomeInstituicao":"IFPB",
+  "nomeEmpresa":"Tectudo", 
+  "cargoExp": "Suporte Técnico", 
+  "periodoExp": "13/10/2021 - 17/03/2022", 
+  "descricaoExp": "Jovem Aprendiz", 
+  "atividades_complementares": [
+    {"nome": "Curso de Inglês",
+    "duracao": "5 anos",
+    "tipo": "Idioma",
+    "atual": "não"}],
+  "nivelFormacao": "Técnico",
+  "nomeFormacao": "Informática",
+  "periodoFormacao": "2015-2018", 
+  "duracaoFormacao": "3 anos", 
+  "nomeCur": "Informática", 
+  "duracaoCur": "3 anos", 
+  "tipoCur": "Graduação",
+  "habilidades": [
+    {"nome": "HTML",
+    "nivel": "Básico"},
+    {"nome": "CSS",
+    "nivel": "Básico"}
+  ]
+}
+
+### Read All
+GET {{host}}/curriculum-infos
+Authorization: bearer {{token}}
+
+### Read Specific Curriculum
+GET {{host}}/curriculum-info/id/18
+Authorization: bearer {{token}}
+
+### Post Create User
+POST {{host}}/create-user
+Content-Type: multipart/form-data; boundary="boundary"
+
+--boundary
+Content-Disposition: form-data; name="image"; filename="milkshake.jpg"
+Content-Type: image/jpeg
+
+
+--boundary
+Content-Disposition: form-data; name="login"
+
+testeformdata@gmail.com
+--boundary
+Content-Disposition: form-data; name="senha"
+
+12345678
+--boundary
+Content-Disposition: form-data; name="confSenha"
+
+12345678
+--boundary--
+
+### Read All
+GET {{host}}/usuarios-infos
+Authorization: bearer {{token}}
+
+### Read Specific User
+GET {{host}}/usuario-info/id/1
+Authorization: bearer {{token}}
+
+### Auth User
+# @name login
+POST {{host}}/auth-user
+Content-Type: application/json
+
+{
+  "login": "testefront@email.com",
+  "senha": "123"
+}
+
+### Get image
+GET {{host}}/get-image-user
+Authorization: bearer {{token}}

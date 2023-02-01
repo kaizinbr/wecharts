@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="resources/css/index.css">
+    <link rel="stylesheet" href="resources/css/loader.css">
+    <link rel="stylesheet" href="resources/css/main.css">
+    <link rel="stylesheet" href="resources/css/user.css">
+    <link rel="stylesheet" href="resources/css/track.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <title>wecharts - Seu próprio chart de música!</title>
+</head>
+<body>
+    
+    <div class="loader">
+        <div class="loading">
+            <span class="blob1 blob"></span>
+            <span class="blob2 blob"></span>
+            <span class="blob3 blob"></span>
+        </div>
+    </div>
+    
+    <header class="header">
+        <nav class="navbar">            
+            <div class="logo">
+                <h1 id="logo"><a href="/">wecharts</a></h1>
+            </div>
+            <div class="user">
+            </div>
+        </nav>
+    </header>
+
+    <div class="menu hide">
+        <a href="/me">Seu perfil</a>
+        <a href="/">Home</a>
+        <a href="/" class="logout">Sair</a>
+    </div>
+
+
+    <main>
+        <div class="container song">
+            <div class="song-cover">
+                <img src="./resources/img/cover placeholder.png" alt="" id="song-cover">
+            </div>
+            <div class="titles">
+                <h1 id="song-name"></h1>
+                <h2 id="song-artist"></h2>
+            </div>
+        </div>
+
+        <div class="btns">
+            <a href="" class="btn" id="btn-preview" target="_blank" rel="noopener noreferrer">Ouvir prévia</a>
+            <a href="" class="btn" id="btn-url" target="_blank" rel="noopener noreferrer">Ouvir no Spotify</a>
+        </div>
+
+        <div class="box song-info">
+            <div class="box-header">
+                <h2>Informações da música</h2>
+            </div>
+            <div class="box-content">
+                <div class="info">
+                    <div class="info-item name">
+                        <span class="category">Nome</span>
+                        <p id="category-item"></p>
+                    </div>
+                    <div class="info-item album">
+                        <span class="category">Álbum</span>
+                        <p id="category-item"></p>
+                    </div>
+                    <div class="info-item artists">
+                        <span class="category ">Artistas</span>
+                        <div>
+                        </div>
+                    </div>
+                    <div class="info-item number">
+                        <span class="category">Número</span>
+                        <p id="category-item"></p>
+                    </div>
+                    <div class="info-item isrc">
+                        <span class="category">ISRC</span>
+                        <p id="category-item"></p>
+                    </div>
+                    <div class="info-item duration">
+                        <span class="category">Duração</span>
+                        <p id="category-item"></p>
+                    </div>
+                    
+                    <div class="info-item bpm">
+                        <span class="category">BPM</span>
+                        <p id="category-item">MUDAR</p>
+                    </div>
+                    <div class="info-item key">
+                        <span class="category">Key</span>
+                        <p id="category-item">MUDAR</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="box album-info">
+            <div class="box-header">
+                <h2>Informações do Álbum</h2>
+            </div>
+            <div class="box-content">
+                <div class="info">
+                    <div class="info-item name">
+                        <span class="category">Nome</span>
+                        <p id="category-item"></p>
+                    </div>
+                    <div class="info-item artists">
+                        <span class="category ">Artistas</span>
+                        <div>
+                        </div>
+                    </div>
+                    <div class="info-item label">
+                        <span class="category">Label</span>
+                        <p id="category-item"></p>
+                    </div>
+                    <div class="info-item release">
+                        <span class="category">Lançamento</span>
+                        <p id="category-item"></p>
+                    </div>
+                    <div class="info-item total">
+                        <span class="category">Total de músicas</span>
+                        <p id="category-item"></p>
+                    </div>
+                    <div class="info-item duration">
+                        <span class="category">Duração</span>
+                        <p id="category-item"></p>
+                    </div>
+                    <div class="info-item popularity">
+                        <span class="category">Popularidade</span>
+                        <p id="category-item"></p>
+                    </div>
+                    <div class="info-item">
+                        <span class="category">Direitos autorais</span>
+                        <div class="copyright">                            
+                        </div>
+                        
+                    </div>                    
+                    <div class="info-item">
+                        <span class="category">Outras faixas</span>
+                        <div class="other-tracks">
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        
+        <div class="box song-info">
+            <div class="box-header">
+                <h2>Informações adicionais</h2>
+            </div>
+            <div class="box-content">
+                <div class="info">
+                    <div class="info-item">
+                        <span class="category">Popularidade</span>
+                        <div class="bar">
+                            <div id="popularity"><span class="percent"></span></div>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <span class="category">Dançabilidade</span>
+                        <div class="bar">
+                            <div id="danceability"><span class="percent"></span></div>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <span class="category">Energia</span>
+                        <div class="bar">
+                            <div id="energy"><span class="percent"></span></div>
+                        </div>
+                    </div>
+                    <!-- <div class="info-item">
+                        <span class="category">Sonoridade</span>
+                        <div class="bar">
+                            <div id="loudness"><span class="percent"></span></div>
+                        </div>
+                    </div> -->
+                    <div class="info-item">
+                        <span class="category">Acústica</span>
+                        <div class="bar">
+                            <div id="acousticness"><span class="percent"></span></div>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <span class="category">Ao vivo</span>
+                        <div class="bar">
+                            <div id="liveness"><span class="percent"></span></div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <span class="category">Positividade</span>
+                        <div class="bar">
+                            <div id="valence"><span class="percent"></span></div>
+                        </div>
+                    </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        
+    </main>
+
+
+    <script type="module" src="resources/js/track.js"></script>
+    <script type="module">
+
+        import Track from './resources/js/track.js';
+        const c = console;
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = urlParams.get('id'); // id da track
+        c.log(id)
+        let trackName;
+
+        //pega o access_token no cookie
+        var access_token = document.cookie
+        if (access_token === '' || access_token === null) {
+            window.location.href = '/';
+        }
+
+        access_token = access_token
+        .split('; ')
+        .find(row => row.startsWith('access_token='))
+        .split('=')[1];
+  
+        console.log(access_token); 
+
+        async function getTrackData(){
+            await putUser();
+
+            const url = `https://api.spotify.com/v1/tracks/${id}?market=BR`;
+
+            const config = {
+                headers: { 'Authorization': 'Bearer ' + access_token },
+                json: true
+            };
+
+            const res = await (await fetch(url, config)).json();
+
+            c.log(res);
+            c.log(res.album.images[0]);
+            document.body.style.backgroundImage = `url(${res.album.images[0].url})`;
+
+            await renderTrack(res);
+            await renderAlbum(res.album.href);
+            // const loader = document.querySelector('.loader');
+            // loader.classList.add('hidden');
+        }
+
+        async function renderTrack(obj){
+            trackName = obj.name;
+            Track.putTopData(obj.album.images[0].url, obj.name, obj.artists[0].name);
+            Track.putBtns(obj.external_urls.spotify, obj.preview_url);
+            Track.putSongInfo(obj);
+        }
+
+        
+        async function renderAlbum(url){
+            const config = {
+                headers: { 'Authorization': 'Bearer ' + access_token },
+                json: true
+            };
+
+            const res = await (await fetch(url, config)).json();
+
+            c.log(res);
+            Track.putAlbumInfo(res, trackName);
+        }
+        
+        async function audioFeatures(){
+            const url = `https://api.spotify.com/v1/audio-features/${id}`;
+
+            const config = {
+                headers: { 'Authorization': 'Bearer ' + access_token },
+                json: true
+            };
+
+            const res = await (await fetch(url, config)).json();
+
+            c.log(res);
+            Track.putAudioFeatures(res);
+        }
+        await audioFeatures();
+
+
+        function renderTopFive(obj){
+            // console.log('obj é tipo: ', typeof obj)
+            if (obj === null || obj === undefined) {
+                console.log('Ocorreu um erro!')
+                return;
+            } else{
+                var num = obj.items.length;
+                App.putTracks(num, obj.items)
+                for (const song of obj.items){
+                    // console.log(song.name);
+                }
+            }
+        }
+
+        async function putUser() {
+
+            console.log('iniciou');
+            let img;
+            let name;
+            let user_product;
+            let id;
+
+            img = sessionStorage.getItem('profile_pic');
+            name = sessionStorage.getItem('user_name');
+            user_product = sessionStorage.getItem('user_product');
+            id = sessionStorage.getItem('user_id');
+
+            if(img && name && user_product && id){
+                const view = `
+                <div class="pic ${id}">
+                    <figure>
+                        <img src="${img}" alt="${name} profile pic">
+                    </figure>
+                    <span class="user_product ${user_product}">${user_product}</span>
+                </div>`;
+
+                const userDiv = document.querySelector('.user');
+                userDiv.classList.add(id)
+                userDiv.innerHTML = view;
+                return;
+            } else {
+                const config = {
+                    method: 'get',
+                    headers: { 'Authorization': 'Bearer ' + access_token },
+                    json: true
+                };
+
+                const url = `https://api.spotify.com/v1/me`
+
+                const user = await (await fetch(url, config)).json();
+                
+                img = user.images[0].url;
+                name = user.display_name;
+                user_product = user.product;
+                id = user.id;
+
+                sessionStorage.setItem('profile_pic', img);
+                sessionStorage.setItem('user_name', name);
+                sessionStorage.setItem('user_product', user_product);
+                sessionStorage.setItem('user_id', id);
+
+                const view = `
+                <div class="pic ${id}">
+                    <figure>
+                        <img src="${img}" alt="${name} profile pic">
+                    </figure>
+                    <span class="user_product ${user_product}">${user_product}</span>
+
+                </div>`;
+
+                const userDiv = document.querySelector('.user');
+                userDiv.classList.add(id)
+                userDiv.innerHTML = view;
+            }
+            
+        }
+
+        window.onload = getTrackData();
+            const loader = document.querySelector('.loader');
+            loader.classList.add('hidden');
+        
+
+        function logout(){
+            sessionStorage.clear();
+            document.cookie = 'access_token=; max-age=0; path=/';
+            document.cookie = 'user_id=; max-age=0; path=/';
+            window.location.href = '/';
+        }
+
+        const menu = document.querySelector('.menu');
+
+        const logoutBtn = document.querySelector('.logout');
+        logoutBtn.addEventListener('click', logout);
+
+        const user = document.querySelector('.user');
+        user.addEventListener('click', () => {
+            menu.classList.toggle('hide');
+        });
+    </script>
+</body>
+
+</html>

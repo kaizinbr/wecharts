@@ -1,0 +1,62 @@
+@key = 6b749e73010d4081b7a673763e7c93d6
+
+## POST create ponto
+
+
+POST http://localhost:3000/create-playlist
+Content-Type: application/json
+
+{
+    "name": "Teste 1",
+    "description": "aaaaaaa"
+}
+
+### GET pontos
+GET https://api.rawg.io/api/games?key={{key}}&developers=61&page_size=30
+
+### GET ponto por nome
+https://api.rawg.io/api/developers/61?key=6b749e73010d4081b7a673763e7c93d6
+
+### GET pontos
+GET https://api.rawg.io/api/developers?key={{key}}
+
+### GET pontos
+GET https://api.rawg.io/api/creators?key={{key}}&search=im+the
+
+# const requests = ['creators', 'developers', 'games', 'genres', 'tags', 'publishers', 'platforms'];
+### GET pontos
+GET https://api.rawg.io/api/games/5525?key=6b749e73010d4081b7a673763e7c93d6
+
+### GET ponto por nome
+GET http://localhost:3000/get-pontos/nome/Teste
+
+### GET ponto por id
+GET http://localhost:3000/construct-top-fifty-artists?access_token=BQDQeOfOJHySiJYsSLRmZGNWik1QC75OslO-XbpXHh4DdLBRRfDe3LFRJWtW64dIou8S3J3gVX7DLb9vLteWZaSuGo_dHPeGtj6ef4QhHFhZbEnLRxj3G9ZH9-IDYS7dowG8Vfi-H9_fSpb3JXPfNp7Dv-JjSBJ9iq-Rez0uZzZ-UaPihYR9G6VpVbn2wMbhYfKLQliSZIiUMkj8X7Glngjnv_fp3jlx-18liAMdNMIcT_FwrXWmIGN7qDf_RyXaFURQJ3Nm-fs&time_range=short_term
+
+
+### GET #1 song
+GET http://localhost:3000/index/top-song
+
+
+### GET #1 artist
+GET http://localhost:3000/index/top-artist
+
+
+### GET currently playing song
+GET http://localhost:3000/index/playing-now
+
+
+### GET 50 recently played songs
+GET http://localhost:3000/teste/recently-played
+
+## POST create playlist
+POST http://localhost:3000/create-playlist
+Content-Type: application/json
+
+{
+    "name": "playlist teste 1",
+    "description": "description"
+}
+
+### GET 50 recently played songs
+GET http://localhost:3000/teste/songs

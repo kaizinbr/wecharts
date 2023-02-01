@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="resources/css/index.css">
+    <link rel="stylesheet" href="resources/css/main.css">
+    <link rel="stylesheet" href="resources/css/loader.css">
+    <link rel="stylesheet" href="resources/css/user.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <title>wecharts - Seu próprio chart de música!</title>
+</head>
+<body>
+    
+    <div class="loader">
+        <div class="loading">
+            <span class="blob1 blob"></span>
+            <span class="blob2 blob"></span>
+            <span class="blob3 blob"></span>
+        </div>
+    </div>
+    
+    <header class="header">
+        <nav class="navbar">            
+            <div class="logo">
+                <h1 id="logo"><a href="/">wecharts</a></h1>
+            </div>
+            <div class="user">
+            </div>
+        </nav>
+    </header>
+
+    <div class="menu hide">
+        <a href="/me">Seu perfil</a>
+        <a href="/">Home</a>
+        <a href="/" class="logout">Sair</a>
+    </div>
+
+    <main>
+
+        <div class="container main-content">
+            <div class="top-content">
+                <h1 id="info-t">Recomendações</h1>
+                    <p id="info-p">Músicas baseadas no que você costuma ouvir.</p>
+                    
+            </div>
+
+
+            <div class="song-box">
+                
+                <div class="controls">
+                    <button class="reload-btn refresh" id="reload" value="reload">
+                        <span class="material-symbols-outlined">
+                            refresh
+                            </span>
+                    </button>
+                    <button class="reload-btn refresh" id="reload" value="reload">
+                        <a href="#save-playlist">
+                            <span class="material-symbols-outlined">
+                                save
+                            </span>
+                        </a>
+                    </button>
+                </div>
+                <div id="tbl-box">
+                    <table class="songs-table">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th colspan="2">Música</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                    
+            </div>
+
+            <div class="create" id="save-playlist">
+                    <label for="playlist-name">
+                        <input autocomplete="off" type="text" id="playlist-name" placeholder="Nome da playlist">
+                    </label>
+                    
+                    <button id="create-playlist-btn">Salvar</button>
+            </div>
+
+            
+                    
+        </div>
+
+        
+    </main>
+
+
+    <script type="module" src="resources/js/app.js"></script>
+    <script type="module">
+        import App from './resources/js/app.js';
+
+        let uris;
+
+        async function getSeedArtists(){
+            const config = {
+                method: 'get',
+                headers: {
+                },
+            };
+        
+            const url = `/construct-top-fifty-artists?time_range=long_term`;
+
+            const artistas = await (await fetch(url, config)).json();
+            // console.log(artistas.items)
+
+            let artistasArr = [];
+            for (var item of artistas.items){
+                artistasArr.push(item.id);
+            }
+
+            return artistasArr;
+        }
+
+        async function seedRandomArtist(){
+            const artistas = await getSeedArtists();
+            // console.log(artistas);
+            
+            const aleatorio = Math.floor(Math.random() * artistas.length);
+            // console.log(artistas[aleatorio]);
+            return artistas[aleatorio];
+        }
+
+        // seedRandomArtist();
+
+        async function getSeedSongs(){
+            const config = {
+                method: 'get',
+                headers: {
+                },
+            };
+        
+            const url = `/construct-top-fifty-songs?time_range=long_term`;
+
+            const artistas = await (await fetch(url, config)).json();
+
+            let songsArr = [];
+            for (var item of artistas.items){
+                songsArr.push(item.id);
+            }
+
+            return songsArr;
+        }
+
+        async function seedRandomSongs(){
+            const musicas = await getSeedSongs();
+            // console.log(musicas);
+            
+            const aleatorio = Math.floor(Math.random() * musicas.length);
+            // console.log(musicas[aleatorio]);
+            return musicas[aleatorio];
+        }
+
+        // seedRandomSongs();
+
+        async function getRecommendations(){
+            await putUser();
+            const seed_artists = await seedRandomArtist();
+            const seed_tracks = await seedRandomSongs();
+
+            const config = {
+                method: 'get',
+                headers: {
+                },
+            };
+        
+            const url = `/index/recommendations?seed_artists=${seed_artists}&seed_tracks=${seed_tracks}`;
+
+            const recommendations = await (await fetch(url, config)).json();
+            // console.log(recommendations);
+
+            // let recommendationsArr = [];
+           
+            uris = App.recommendations('30', recommendations);
+            console.log(uris);
+
+            
+            const loader = document.querySelector('.loader');
+            loader.classList.add('hidden');
+            // return recommendationsArr;
+        }
+
+        async function create(name) {
+
+            const user_id = document.cookie
+            .split('; ')
+            .find(row => row.startsWith('user_id='))
+            .split('=')[1];
+            console.log('user_id: ' + user_id);
+
+            
+
+            const body = {
+                        "name": name,
+                        "user_id": user_id
+                    }
+
+            const config = {
+                method: 'post',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(body)
+                    
+                
+            };
+        
+            const url = `/create-playlist`;
+
+            const playlist = await (await fetch(url, config)).json();
+            console.log(playlist.id);
+
+            return playlist;
+        }
+
+        async function putTracksOnPlaylist(playlist, tracks) {
+            const playlist_id = playlist.id;
+            console.log(playlist_id)
+            var link = '';
+
+            const body = {
+                "playlist_id": playlist_id,
+                "tracks": tracks
+            }
+
+            const config = {
+                method: 'post',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(body)
+                    
+                
+            };
+        
+            const url = `/put-tracks-on-playlist`;
+
+            const result = await (await fetch(url, config)).json();
+            console.log(result);
+            if (result){
+                console.log('Playlist criada com sucesso!')
+                link = `https://open.spotify.com/playlist/${playlist_id}`;
+            } else {
+                console.log('Erro ao criar playlist')
+            }
+
+            return link;
+        }
+
+        function putLink(link){
+            const div = document.getElementById('save-playlist');
+            
+            div.innerHTML = `<button class="access-playlist"><a href="${link}" target="_blank" rel="noopener noreferrer">Acesse sua nova playlist!</a> </button>`
+        }
+
+        function cancelLink(){
+            const div = document.getElementById('save-playlist');
+            
+            div.innerHTML = `<label for="playlist-name">
+                        <input autocomplete="off" type="text" id="playlist-name" placeholder="Nome da playlist">
+                    </label>
+                    
+                    <button id="create-playlist-btn">Salvar</button>`;
+
+            document.getElementById('create-playlist-btn').addEventListener('click', async function(){
+                var name = document.getElementById('playlist-name').value;
+                if(name == ''){
+                    name = 'Playlist criada por Wecharts';
+                }
+                const playlist = await create(name);
+                console.log(uris);
+                const link = await putTracksOnPlaylist(playlist, uris);
+                console.log(link);
+                putLink(link);
+            });
+        }
+
+
+        document.getElementById('create-playlist-btn').addEventListener('click', async function(){
+            var name = document.getElementById('playlist-name').value;
+            if(name == ''){
+                name = 'Playlist criada por Wecharts';
+            }
+            const playlist = await create(name);
+            console.log(uris);
+            const link = await putTracksOnPlaylist(playlist, uris);
+            console.log(link);
+            putLink(link);
+        });
+
+        document.getElementById('reload').addEventListener('click', async function(){
+            cancelLink();
+            const playlist = await getRecommendations();
+        });
+        
+        async function putUser() {
+
+            console.log('iniciou');
+            let img;
+            let name;
+            let user_product;
+            let id;
+
+            img = sessionStorage.getItem('profile_pic');
+            name = sessionStorage.getItem('user_name');
+            user_product = sessionStorage.getItem('user_product');
+            id = sessionStorage.getItem('user_id');
+
+            if(img && name && user_product && id){
+                const view = `
+                <div class="pic ${id}">
+                    <figure>
+                        <img src="${img}" alt="${name} profile pic">
+                    </figure>
+                    <span class="user_product ${user_product}">${user_product}</span>
+                </div>`;
+
+                const userDiv = document.querySelector('.user');
+                userDiv.classList.add(id)
+                userDiv.innerHTML = view;
+                return;
+            } else {
+                const config = {
+                    method: 'get',
+                    headers: { 'Authorization': 'Bearer ' + access_token },
+                    json: true
+                };
+
+                const url = `https://api.spotify.com/v1/me`
+
+                const user = await (await fetch(url, config)).json();
+                
+                img = user.images[0].url;
+                name = user.display_name;
+                user_product = user.product;
+                id = user.id;
+
+                sessionStorage.setItem('profile_pic', img);
+                sessionStorage.setItem('user_name', name);
+                sessionStorage.setItem('user_product', user_product);
+                sessionStorage.setItem('user_id', id);
+
+                const view = `
+                <div class="pic ${id}">
+                    <figure>
+                        <img src="${img}" alt="${name} profile pic">
+                    </figure>
+                    <span class="user_product ${user_product}">${user_product}</span>
+
+                </div>`;
+
+                const userDiv = document.querySelector('.user');
+                userDiv.classList.add(id)
+                userDiv.innerHTML = view;
+            }
+            }
+
+
+        window.onload = getRecommendations();
+
+    
+        function logout(){
+            sessionStorage.clear();
+            document.cookie = 'access_token=; max-age=0; path=/';
+            document.cookie = 'user_id=; max-age=0; path=/';
+            window.location.href = '/';
+        }
+
+        const menu = document.querySelector('.menu');
+
+        const logoutBtn = document.querySelector('.logout');
+        logoutBtn.addEventListener('click', logout);
+
+        const user = document.querySelector('.user');
+        user.addEventListener('click', () => {
+            menu.classList.toggle('hide');
+        });
+    </script>
+
+
+</body>
+</html>
