@@ -26,7 +26,6 @@ app.use('/', express.static('public'))
   
 app.use('/', router);
 
-
 /**
  * This is an example of a basic node.js script that performs
  * the Authorization Code oAuth2 flow to authenticate against
@@ -46,7 +45,7 @@ app.use('/', router);
 
 var client_id = 'cc0b2308c9764162bd781deed153abf1'; // Your client id
 var client_secret = 'dc43ce24f0e7466fab83ca4bd45018f8'; // Your secret
-var redirect_uri = 'https://wecharts.onrender.com/callback' //'http://localhost:3000/callback'; // Your redirect uri
+var redirect_uri; //=  'http://localhost:3000/callback''https://wecharts.onrender.com/callback'; // Your redirect uri
 
 var access_token;
 var refresh_token;
@@ -69,10 +68,19 @@ var generateRandomString = function(length) {
 
 var stateKey = 'spotify_auth_state';
 
+app.post('/login', function(req, res) {
+
+  redirect_uri = req.body.redirect_uri;
+
+  // your application requests authorization
+  res.send({sucess: 'tudo certo, pode ir para o login'})
+});
+
 app.get('/login', function(req, res) {
 
   var state = generateRandomString(16);
   res.cookie(stateKey, state);
+  console.log('redirect_uri: ' + redirect_uri)
 
   // your application requests authorization
   var scope = 'user-read-private user-read-email user-top-read user-follow-read user-library-read playlist-modify-private user-read-currently-playing user-read-recently-played user-read-playback-state';
@@ -136,22 +144,9 @@ app.get('/callback', async function(req, res) {
 
 
         // we can also pass the token to the browser to make requests from there
-         res.redirect('/'
-         //mudança de lógica para melhor integração das páginas, agora o token é guardado como cookie e expira em 1 hora
-          // '/home?' +
-          // querystring.stringify({
-          //   access_token: access_token,
-          //   refresh_token: refresh_token,
-          //   // data: data
-          // })
-          //+ 
-          
-          // JSON.stringify({            
-          //   access_token: access_token,
-          //   refresh_token: refresh_token
-          // })
-          );
+         res.redirect('/');
       } else {
+        console.log(error);
         res.redirect('/#' +
           querystring.stringify({
             error: 'invalid_token'
@@ -242,6 +237,13 @@ app.get('/track', async function(req, res) {
 
 
   res.sendFile(path.join(__dirname, '/../public/track.html'));
+  
+});
+
+app.get('/test', async function(req, res) {
+  const url = window.location.origin;
+
+  res.send(url)
   
 });
 

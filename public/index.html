@@ -223,7 +223,7 @@
 
         if (access_token === 'não tem cookie') {
             main.classList.add('hidden');
-            // window.location.href = '/';
+            await getUrl()
             notLogged.classList.remove('hidden');            
             loader.classList.add('hidden');
         }else {
@@ -351,7 +351,7 @@
 
                 const user = await (await fetch(url, config)).json();
                 
-                img = user.images[0].url;
+                img = (user.images == []) ? user.images[0].url : 'resources/img/cover placeholder.png';
                 name = user.display_name;
                 user_product = user.product;
                 id = user.id;
@@ -374,6 +374,26 @@
                 userDiv.classList.add(id)
                 userDiv.innerHTML = view;
             }
+        }
+
+        async function getUrl(){
+            const url = window.location.origin;
+
+            await fetch("/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({redirect_uri: url + '/callback'}),
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log("Success:", data);
+                })
+                .catch((error) => {
+                    console.error("Error:", error);
+                });
+
         }
       
         async function getData(){

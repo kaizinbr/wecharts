@@ -33,21 +33,32 @@ function playing(obj){
 };
 
 function putTopItems(songObj, artistObj){
-    const songImg = document.querySelector('.card.top-tracks .card-footer img');
-    const songTitle = document.querySelector('.card.top-tracks .card-footer h4');
-    const songArtist = document.querySelector('.card.top-tracks .card-footer p');
 
-    songImg.setAttribute('src', songObj.items[0].album.images[2].url);
-    songImg.setAttribute('alt', `${songObj.items[0].album.artists[0].name} - ${songObj.items[0].name}`);
-    songTitle.textContent = songObj.items[0].name;
-    songArtist.textContent = songObj.items[0].album.artists[0].name;
+    if (songObj.items[0] == null || songObj.items[0] == undefined) {
+        console.log('Não há músicas salvas no seu perfil. :(');
+        window.alert('Parece que não há músicas salvas no seu perfil. Algumas funções podem não funcionar corretamente. Tente usar sua conta regularmente por um período de 4 semanas e volte!');
+    }
+    else{
 
-    const artistImg = document.querySelector('.card.top-artists .card-footer img');
-    const artistName = document.querySelector('.card.top-artists .card-footer h4');
 
-    artistImg.setAttribute('src', artistObj.items[0].images[2].url);
-    artistImg.setAttribute('alt', `${artistObj.items[0].name}`);
-    artistName.textContent = artistObj.items[0].name;
+        const songImg = document.querySelector('.card.top-tracks .card-footer img');
+        const songTitle = document.querySelector('.card.top-tracks .card-footer h4');
+        const songArtist = document.querySelector('.card.top-tracks .card-footer p');
+
+        console.log(songObj)
+
+        songImg.setAttribute('src', songObj.items[0].album.images[2].url);
+        songImg.setAttribute('alt', `${songObj.items[0].album.artists[0].name} - ${songObj.items[0].name}`);
+        songTitle.textContent = songObj.items[0].name;
+        songArtist.textContent = songObj.items[0].album.artists[0].name;
+
+        const artistImg = document.querySelector('.card.top-artists .card-footer img');
+        const artistName = document.querySelector('.card.top-artists .card-footer h4');
+
+        artistImg.setAttribute('src', artistObj.items[0].images[2].url);
+        artistImg.setAttribute('alt', `${artistObj.items[0].name}`);
+        artistName.textContent = artistObj.items[0].name;
+    }
 };
 
 function favoriteGenre(genre){
@@ -57,15 +68,20 @@ function favoriteGenre(genre){
 };
 
 function recentlyPlayed(obj){
-    const recently_played_song = obj.items[0].track.name;
-    const recently_played_artist = obj.items[0].track.artists[0].name;
+    if (obj.items[0] == null || obj.items[0] == undefined) {
+        console.log('Não há músicas salvas no seu perfil. :(')
+    }
+    else{
+        const recently_played_song = obj.items[0].track.name;
+        const recently_played_artist = obj.items[0].track.artists[0].name;
 
-    const img = document.querySelector('.card.recently-played .card-footer img');
-    const song = document.querySelector('.card.recently-played .card-footer .recently-played-content');
-    const artist = document.querySelector('.card.recently-played .card-footer .recently-played-artist');
-    img.setAttribute('src', obj.items[0].track.album.images[2].url);
-    song.textContent = recently_played_song;
-    artist.textContent = recently_played_artist;
+        const img = document.querySelector('.card.recently-played .card-footer img');
+        const song = document.querySelector('.card.recently-played .card-footer .recently-played-content');
+        const artist = document.querySelector('.card.recently-played .card-footer .recently-played-artist');
+        img.setAttribute('src', obj.items[0].track.album.images[2].url);
+        song.textContent = recently_played_song;
+        artist.textContent = recently_played_artist;
+    }
 }
 
 
