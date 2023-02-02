@@ -46,7 +46,7 @@ app.use('/', router);
 
 var client_id = 'cc0b2308c9764162bd781deed153abf1'; // Your client id
 var client_secret = 'dc43ce24f0e7466fab83ca4bd45018f8'; // Your secret
-var redirect_uri = 'http://localhost:3000/callback'; // Your redirect uri
+var redirect_uri = 'https://wecharts.onrender.com/callback' //'http://localhost:3000/callback'; // Your redirect uri
 
 var access_token;
 var refresh_token;
@@ -81,7 +81,7 @@ app.get('/login', function(req, res) {
       response_type: 'code',
       client_id: client_id,
       scope: scope,
-      redirect_uri: 'https://wecharts.onrender.com/callback',
+      redirect_uri: redirect_uri,
       state: state
     }));
 });
