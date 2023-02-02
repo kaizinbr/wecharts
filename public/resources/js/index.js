@@ -36,7 +36,7 @@ function putTopItems(songObj, artistObj){
 
     if (songObj.items[0] == null || songObj.items[0] == undefined) {
         console.log('Não há músicas salvas no seu perfil. :(');
-        window.alert('Parece que não há músicas salvas no seu perfil. Algumas funções podem não funcionar corretamente. Tente usar sua conta regularmente por um período de 4 semanas e volte!');
+        window.alert('Parece que não há músicas salvas no seu perfil ou você não usa sua conta há algum tempo. Algumas funções podem não funcionar corretamente. Tente usar sua conta regularmente por um período de 4 semanas e volte!');
     }
     else{
 
@@ -46,6 +46,7 @@ function putTopItems(songObj, artistObj){
         const songArtist = document.querySelector('.card.top-tracks .card-footer p');
 
         console.log(songObj)
+
 
         songImg.setAttribute('src', songObj.items[0].album.images[2].url);
         songImg.setAttribute('alt', `${songObj.items[0].album.artists[0].name} - ${songObj.items[0].name}`);
