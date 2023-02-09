@@ -3,12 +3,18 @@
 ## POST create ponto
 
 
-POST http://localhost:3000/create-playlist
+POST https://clienttoken.spotify.com/v1/clienttoken
 Content-Type: application/json
 
 {
-    "name": "Teste 1",
-    "description": "aaaaaaa"
+    "client_data":
+    {
+        "client_version":"1.2.5.518.g12232155",
+        "client_id":"d8a5ed958d274c2e8ee717e6a4b0971d",
+        "js_sdk_data":{"device_brand":"unknown",
+        "device_model":"desktop","os":"Windows",
+        "os_version":"NT 10.0"}
+    }
 }
 
 ### GET pontos
@@ -60,3 +66,37 @@ Content-Type: application/json
 
 ### GET 50 recently played songs
 GET http://localhost:3000/teste/songs
+
+### GET
+GET https://api-partner.spotify.com/pathfinder/v1/query?operationName=queryArtistOverview&variables=%7B%22uri%22%3A%22spotify%3Aartist%3A41MozSoPIsD1dJM0CLPjZF%22%2C%22locale%22%3A%22%22%7D&extensions=%7B%22persistedQuery%22%3A%7B%22version%22%3A1%2C%22sha256Hash%22%3A%22b82fd661d09d47afff0d0239b165e01c7b21926923064ecc7e63f0cde2b12f4e%22%7D%7D
+authorization: Bearer BQDaemPnrzo42VUOtPPpLT0vI_5RxYjW-iJa3lIlJjvlLvLmuKJ0Jjp75tat2wMUoD1zBtjZpzzxYJMuc-V3UJkDi53PrDLXYk2OsgtDI_ToIK1tgLDpiSxYtNLXB05tkzPto_LC1vd0KktRYJNeyz-KcXwBVDFH3WajqGhuzoChFDbP6Zc98Nmi7zoTYX7JLiSi7TJJITJ_4n1w3hwWsYEYXWW5n1ybzuxoJ8KEWpg_DJ2LFf9Gg8ngBBz20H_LMkUu0xU8dIoP6tBFBIjOJ1c8Ey88beBhfpWxtQQE9_4WCQ7H9AbR7T8XLDVGZjA9PZxihSgSCE7ZM8ckcsEjVGl_BMb6VQ
+client-token: AACDnIbeVGHpljQzFrpfoGabJtp8XxrtJyzpv//5a741eiDe3DtM0C+68IJOxDufSFncIy46RMg+MYIdB4AeFGJCxBfg5s2gi3whHVNRDTgSNclP/Pn/YwoYzkZg8e13/eoGbxfOBdbsDz+yHvxNiasmLIlHXAfBB/jcOU6RzzBWVji8j/e/hUU9Uu5snHuZZBmfShcZ57G5XLYAZC1xphpEuLCxNfw6VAMvcs99dedhEAaLkchlKb1tJNEXwDhWOx7XpZKmyZMu/myucEObCVDXLHSt+znZOfqBdoEqSL6UKQ==
+
+
+### GET
+GET https://api-partner.spotify.com/pathfinder/v1/query?operationName=getTrack&variables=%7B%22uri%22%3A%22spotify%3Atrack%3A0rhI6gvOeCKA502RdJAbfs%22%7D&extensions=%7B%22persistedQuery%22%3A%7B%22version%22%3A1%2C%22sha256Hash%22%3A%226af75b996d93636e4f1980c170f1171a457bf936f47d6ee1e38f57671d3ae7bd%22%7D%7D
+authorization: Bearer BQCQ75uEpBnX_RoNOHOqo9gAXilD6zZACROPEyVOBoGNTQoOAhPiMhzzBdH6CZrMEdhRvodlHrRjZo-AgDH_tXxwRai195WCeY8YuWxJzQ2jdKKQWQGKzubrwPVRFbbZv8200woUbdOPAL9yjW9aCix5SSNjIo0rWVTtANHbGL6v2_GoVWXmiak5xULiHXZchWYGFGm6DbfRD_bOT2gYfEqCvlcdXVPJDt5u5dyajsWaGn-HeMQwyv3iE5GgNZQ5ZEwG9c2yTuViXdg5NQ
+client-token: AAAQzJA+9ktBI1TzDVwF+EGrS9p/2PoRT5glXT7BW5M+zpy9Xs2U8tiJ7R6ozr0CupQLAN+0Rnmvc4hVOGEHmBlAxJDN2rEbcnSKpFD8WcDi6cTqUBN31/WVcsqKiXzgyb/B8xzMv5EPMGAx9a3GfY1F5jD8YwCfeZGu9GMlBme0E8Vjsudy7GE68il/QMIAGe6778YezuffUC5aI5Xi76okaffaygWGkNtlhz35CbKvzsKq/CrsCmq6kjhs+1RWj5LEdd5Wzc8W3XPMk34UP2SlEofrVgqP2DKaiLsdMQI=
+
+### GET
+GET https://spclient.wg.spotify.com/color-lyrics/v2/seo/track/0rhI6gvOeCKA502RdJAbfs?market=from_token
+authorization: Bearer BQDJyiEyHAnnnHeSPPzZw1PeW6M1k5GmyW1cecxN9qc-8VvBDMiISiHNbreBoQwMsojZN9E9Lrt4x0RdvoWpFzwdjiYocn99MAssxkKcjIuGA6Sr7zEy0DnvC5vqJM6OA36X70A1YVauXLKbFhWeLlEumUSOApVQFvQ-edbWORmNeMfRXoNh6uqaIP_qlxmIiV7rXyVL1vd63vK0cppwoCiAhR-G91anouyppG5fP0fau2NZxqTpsdickgOmiiIuhRSw_GeGx_dHbLn0XXHyLmTgU3Esicf2DP9xLF28ZliqQ52fv2xnTmho4K5eREH2Ussu6ly_AdeHIYFnIIwwUmAdYwbpCA"
+client-token: AAB8GkiKFIJdCS+4AUZg6jPJ02d0QbIbY2f/F6ET6/y7lJZgGwe+SddSQtww7QtmvZIy/8rolaCSRH9nkN/3vJ/+cc4LXW+yvlWFNk4LpIKP7AF+n5Dr0kzn+L+LaWhOaEoBtGorJWzz160+rpQKo69EZiDAE9sJt9U71jfpyPqe8pPmzFelelP45bZbmbbOEt9D6Fj9l4hcHoKzGZQ6ovQWc2QfmxeGpxIrtDV7c4M/bcpxQLxjZUbeIMUkpOU17WtRTHOnm2cJ1TmL4G8cFx0E4PHUGTm+oC0EvQg8AjORXw==
+
+## POST create playlist
+POST https://clienttoken.spotify.com/v1/clienttoken
+Content-Type: application/json
+
+{
+    "client_data":
+    {
+        "client_version":"1.2.5.518.g12232155",
+        "client_id":"d8a5ed958d274c2e8ee717e6a4b0971d",
+        "js_sdk_data":{"device_brand":"unknown",
+        "device_model":"desktop","os":"Windows",
+        "os_version":"NT 10.0"}
+    }
+}
+
+###GET
+GET https://spclient.wg.spotify.com/color-lyrics/v2/seo/track/0rhI6gvOeCKA502RdJAbfs?market=br

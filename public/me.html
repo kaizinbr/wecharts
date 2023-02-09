@@ -102,6 +102,11 @@
                         <span class="number-of-items"></span>
                         <h5 class="sub-text">Artistas</h5>
                     </div>
+                    <hr>
+                    <div class="items genre">
+                        <h4 class="default-text">Seu gênero musical mais ouvido é:</h4>
+                        <span class="favorite-genre"></span>
+                    </div>
 
                     <hr>
                     <div class="items danceability">
@@ -677,6 +682,20 @@
             }
         }
 
+        async function favoriteGenre(){
+            const config = {
+                method: 'get',
+                headers: {
+                },
+            };
+        
+            const url = `/favorite-genres`;
+
+            const favorite_genre = await (await fetch(url, config)).json();
+
+            return favorite_genre;
+        };
+
 
         async function getData(){
             const el = document.querySelector('html');
@@ -684,11 +703,15 @@
             el.style.overflow = 'hidden';
             el.style.maxHeight = '100vh';
 
+            var favorite_genre = await favoriteGenre();
+            favorite_genre = (favorite_genre == undefined || favorite_genre == null || favorite_genre == '') ? 'no genre' : favorite_genre;
+            await App.favoriteGenre(favorite_genre);
+
             await putUser();
             await putBackground();
             await putTracks();
             await putAlbums();
-            await putArtists();
+            await putArtists();            
             let ids = await getFiftyItems();
             ids = (ids == undefined || ids == null || ids == '') ? 'no IDs' : ids;
             await verifyDanceability(ids);

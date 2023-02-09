@@ -83,7 +83,7 @@ app.get('/login', function(req, res) {
   console.log('redirect_uri: ' + redirect_uri)
 
   // your application requests authorization
-  var scope = 'user-read-private user-read-email user-top-read user-follow-read user-library-read playlist-modify-private user-read-currently-playing user-read-recently-played user-read-playback-state';
+  var scope = 'user-read-private user-modify-playback-state user-read-email user-top-read user-follow-read user-library-read playlist-modify-private user-read-currently-playing user-read-recently-played user-read-playback-state';
   res.redirect('https://accounts.spotify.com/authorize?' +
     querystring.stringify({
       response_type: 'code',
@@ -102,6 +102,8 @@ app.get('/callback', async function(req, res) {
   var code = req.query.code || null;
   var state = req.query.state || null;
   var storedState = req.cookies ? req.cookies[stateKey] : null;
+  var client_token = req.query
+  console.log(client_token);
 
   if (state === null || state !== storedState) {
     res.redirect('/#' +
@@ -124,6 +126,7 @@ app.get('/callback', async function(req, res) {
     };
 
     request.post(authOptions, function(error, response, body) {
+      console.log(body);
       if (!error && response.statusCode === 200) {
           access_token = body.access_token,
           refresh_token = body.refresh_token;
@@ -237,13 +240,6 @@ app.get('/track', async function(req, res) {
 
 
   res.sendFile(path.join(__dirname, '/../public/track.html'));
-  
-});
-
-app.get('/test', async function(req, res) {
-  const url = window.location.origin;
-
-  res.send(url)
   
 });
 

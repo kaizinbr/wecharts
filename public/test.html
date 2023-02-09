@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>smt</h1>
+    <script type="module">
+        let access_token = document.cookie 
+        .split('; ')
+        .find(row => row.startsWith('access_token='))
+        .split('=')[1];
+        console.log(access_token);
+
+
+    //     async function getToken() {
+    //     var token;
+    //     fetch('https://clienttoken.spotify.com/v1/clienttoken', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Accept': 'application/json',
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify({ 
+    //             "client_data":
+    //                 {
+    //                     "client_version":"1.2.5.518.g12232155",
+    //                     "client_id":"d8a5ed958d274c2e8ee717e6a4b0971d",
+    //                     "js_sdk_data":{"device_brand":"unknown",
+    //                     "device_model":"desktop","os":"Windows",
+    //                     "os_version":"NT 10.0"}
+    //                 }
+    //         })
+    //     })
+    //     .then(response => response.json())
+    //     .then(response => console.log(JSON.stringify(response.granted_token.token)))
+    //     .then(response => token = response);
+        
+    //     return token;
+    //   }
+
+        async function getToken(){
+            const config = {
+                method: 'get',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            };
+        
+            const url = `https://open.spotify.com/get_access_token`;
+
+            const token = await (await fetch(url, config)).json();
+            // console.log(token.granted_token.token);
+
+            return token.accessToken;
+        }
+        
+        const token = await getToken();
+        console.log(token);
+
+        const id = '1AFVTHHm7kKoQ6Rgb25x3p';
+        async function getData(clientToken){
+            const config = {
+                method: 'get',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + access_token
+                },
+                client_token: clientToken
+            };
+        
+            const url = `https://api-partner.spotify.com/pathfinder/v1/query?operationName=getTrack&variables=%7B%22uri%22%3A%22spotify%3Atrack%3A${id}%22%7D&extensions=%7B%22persistedQuery%22%3A%7B%22version%22%3A1%2C%22sha256Hash%22%3A%226af75b996d93636e4f1980c170f1171a457bf936f47d6ee1e38f57671d3ae7bd%22%7D%7D`;
+
+            const artistData = await (await fetch(url, config)).json();
+            console.log(artistData);
+
+            return artistData;
+        }
+
+        const artistData = await getData(token);
+        console.log(artistData);
+        
+      
+    </script>
+</body>
+</html>

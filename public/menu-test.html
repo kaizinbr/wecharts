@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="resources/css/index.css">
+    <link rel="stylesheet" href="resources/css/main.css">
+    <link rel="stylesheet" href="resources/css/loader.css">
+    <link rel="stylesheet" href="resources/css/user.css">
+    <link rel="stylesheet" href="resources/css/menu.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <title>wecharts - Seu próprio chart de música!</title>
+</head>
+<body>
+
+        
+    <header class="header">
+        <nav class="navbar">            
+            <div class="logo">
+                <h1 id="logo"><a href="/">wecharts</a></h1>
+            </div>
+            <div class="option">
+                <ul class="menu-desktop hidden">
+                    <li><a href="/me">Seu perfil</a></li>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/" class="logout">Sair</a></li>
+                    
+                </ul>
+                <div class="user">
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="menu hide">
+        <a href="/me">Seu perfil</a>
+        <a href="/">Home</a>
+        <a href="/" class="logout">Sair</a>
+    </div>
+
+    <main class="hidden">
+        <div class="playing-box">
+        </div>
+        
+        <div class="main-content index">
+            <div class="top-cards">
+                <a href="/my-top-artists" class="card-link">
+                    <div class="card up-top-artists">
+                        <div class="card-header">
+                            <h1 class="card-title">Top Artistas</h1>
+                        </div>
+                        <figure class="card-img">
+                            <img src="resources/img/top-artist-placeholder.png" alt="capa">
+                        </figure>
+                        <div class="card-footer">
+                            <span id="number">#1</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="/my-top-songs" class="card-link">
+                    <div class="card up-top-tracks">
+                        <div class="card-header">
+                            <h1 class="card-title">Top Músicas</h1>
+                        </div>
+                        <figure class="card-img">
+                            <img src="resources/img/candy.jpeg" alt="capa">
+                        </figure>
+                        <div class="card-footer">
+                            <span id="number">#1</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="/recently-played" class="card-link">
+                    <div class="card up-recently-played">
+                        <div class="card-header">
+                            <h1 class="card-title">Tocadas Recentemente</h1>
+                        </div>
+                        <figure class="card-img">
+                            <img src="resources/img/res-played.png" alt="capa">
+                        </figure>
+                        <div class="card-footer">
+                            <span id="number">#1</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="/recommendations" class="card-link">
+                    <div class="card up-recommendations">
+                        <div class="card-header">
+                            <h1 class="card-title">Recomendações</h1>
+                        </div>
+                        <figure class="card-img">
+                            <img src="resources/img/tcc-foe.jpeg" alt="capa">
+                        </figure>
+                        <div class="card-footer">
+                            <span id="number">+10</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+                
+            <div class="banner">
+                <div class="banner-content">
+                    <h1 class="banner-title">wecharts</h1>
+                    <p class="banner-text">Seu próprio chart de música</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="all-content">
+            <h1 id="funcionalidades">Todas as funcionalidades:</h1>
+
+            <div class="card-box">
+                <div class="card top-tracks">
+                    <div class="card-header">
+                        <a href="/my-top-songs" class="card-link"><h2 class="title">Top 50 Músicas - Você</h2></a>
+                        <h3 class="subtitle">As #1 na sua casa</h3>
+                    </div>
+                    <div class="card-footer">
+                        <figure>
+                            <img src="resources/img/cover placeholder.png" alt="">
+                        </figure>
+                        <div class="card-infos">
+                            <span class="period">#1 nas últimas 4 semanas</span>
+                            <div class="track-data">
+                                <h4 class="track-title"></h4>
+                                <p class="track-artist"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card top-artists">
+                    <div class="card-header">
+                        <a href="/my-top-artists" class="card-link"><h2 class="title">Top 50 Artistas - Você</h2></a>
+                        <h3 class="subtitle">Os melhores da (sua) crítica</h3>
+                    </div>
+                    <div class="card-footer">
+                        <figure>
+                            <img src="resources/img/cover placeholder.png" alt="">
+                        </figure>
+                        <div class="card-infos">
+                            <span class="period">#1 nas últimas 4 semanas</span>
+                            <div class="artist-data">
+                                <h4 class="artist-title"></h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card recently-played">
+                    <div class="card-header">
+                        <a href="/recently-played" class="card-link"><h2 class="title">Suas últimas reproduções</h2></a>
+                        <h3 class="subtitle">Veja se só você anda ouvindo na sua conta</h3>
+                    </div>
+                    <div class="card-footer">
+                        <figure>
+                            <img src="resources/img/cover placeholder.png" alt="">
+                        </figure>
+                        <div class="card-infos">
+                            <span class="period">Última reprodução</span>
+                            <div class="artist-data">
+                                <h4 class="recently-played-content"></h4>
+                                <p class="recently-played-artist"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card recommendations">
+                    <div class="card-header">
+                        <a href="/recommendations" class="card-link"><h2 class="title">Veja recomendações</h2></a>
+                        <h3 class="subtitle">Crie uma playlist especial com base no que você ouve</h3>
+                    </div>
+                    <div class="card-footer">
+                        <figure>
+                            <img src="resources/img/tnc.jpeg" alt="">
+                        </figure>
+                    </div>
+                </div>
+            </div>
+                
+
+
+        </div>
+        
+    </main>
+
+
+
+    <div class="float">
+        <div class="float-menu">
+            <ul>
+                <li>
+                    <i class='bx bx-home-alt-2 bx-md' ></i>
+                </li>
+                <li>
+                    <i class='bx bx-user bx-md'></i>
+                </li>
+                <li>
+                    <i class='bx bx-log-out bx-md'></i>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        const float = document.querySelector(".float");
+        float.addEventListener("click", () => {
+            float.classList.toggle("active");
+        });
+    </script>
+
+    <script type="module" src="resources/js/index.js"></script>
+    <script type="module" src="resources/js/logic.js"></script>
+    <script type="module">
+
+        import Index from './resources/js/index.js';
+
+        // const urlParams = new URLSearchParams(window.location.search);
+        //pega o access_token no cookie
+        let access_token = document.cookie ? document.cookie : 'não tem cookie';
+        console.log(access_token);
+
+        const main = document.querySelector('main');
+        const notLogged = document.querySelector('.not-logged');
+        const loader = document.querySelector('.loader');
+        const desktopMenu = document.querySelector('.menu-desktop');
+
+        if (access_token === 'não tem cookie') {
+            main.classList.add('hidden');
+            await getUrl()
+            notLogged.classList.remove('hidden');            
+            loader.classList.add('hidden');
+        }else {
+            main.classList.remove('hidden');
+            desktopMenu.classList.remove('hidden');
+            notLogged.classList.add('hidden');
+        }
+
+        access_token = access_token
+        .split('; ')
+        .find(row => row.startsWith('access_token='))
+        .split('=')[1];
+
+        const menu = document.querySelector('.menu');
+
+        const logoutBtn = document.querySelector('.logout');
+        logoutBtn.addEventListener('click', logout);
+
+                console.log(window.innerWidth)
+        const user = document.querySelector('.user');
+        user.addEventListener('click', () => {
+            if (window.innerWidth > 614){
+                console.log('Não vai aparecer !! 😠')
+            } else {
+                console.log('Vai aparecer !! 😁')
+                menu.classList.toggle('hide');
+            }
+        });
+
+
+  
+        console.log(access_token); 
+
+        async function getPlayingNow(){
+            const config = {
+                method: 'get',
+                headers: {
+                },
+            };
+        
+            const url = `/index/playing-now`;
+
+            const playing_now_data = await (await fetch(url, config)).json();
+            console.log(playing_now_data)
+
+            if (playing_now_data.is_playing) {
+                return playing_now_data;
+            } else {
+                const playing = document.querySelector('.playing-box');
+                playing.classList.add('hidden');
+                return false;
+            }
+        }
+
+        async function getTopTrack(){
+        
+            const url = `https://api.spotify.com/v1/me/top/tracks?time_range=short_term&offset=0&limit=1`;
+
+            const config = {
+                method: 'get',
+                headers: { 'Authorization': 'Bearer ' + access_token },
+                json: true
+            };
+        
+
+            const top_song = await (await fetch(url, config)).json();
+            console.log(top_song)
+            return top_song;
+        };
+
+        async function getTopArtist(){
+            const config = {
+                method: 'get',
+                headers: { 'Authorization': 'Bearer ' + access_token },
+                json: true
+            };
+        
+            const url = `https://api.spotify.com/v1/me/top/artists?time_range=short_term&offset=0&limit=1`;
+
+            const top_artist = await (await fetch(url, config)).json();
+
+            return top_artist;
+        };
+
+        async function favoriteGenre(){
+            const config = {
+                method: 'get',
+                headers: {
+                },
+            };
+        
+            const url = `/favorite-genres`;
+
+            const favorite_genre = await (await fetch(url, config)).json();
+
+            return favorite_genre;
+        };
+
+        async function lastPlayed(){
+            const config = {
+                method: 'get',
+                headers: { 'Authorization': 'Bearer ' + access_token },
+                json: true
+            };
+        
+            const url = `https://api.spotify.com/v1/me/player/recently-played?offset=0&limit=50`;
+
+            const last_played = await (await fetch(url, config)).json();
+
+            return last_played;
+        }
+
+        async function putUser() {
+
+            console.log('iniciou');
+            let img;
+            let name;
+            let user_product;
+            let id;
+
+            img = sessionStorage.getItem('profile_pic');
+            name = sessionStorage.getItem('user_name');
+            user_product = sessionStorage.getItem('user_product');
+            id = sessionStorage.getItem('user_id');
+
+            if(img && name && user_product && id){
+                const view = `
+                <div class="pic ${id}">
+                    <figure>
+                        <img src="${img}" alt="${name} profile pic">
+                    </figure>
+                    <span class="user_product ${user_product}">${user_product}</span>
+                </div>`;
+
+                const userDiv = document.querySelector('.user');
+                userDiv.classList.add(id)
+                userDiv.innerHTML = view;
+                return;
+            } else {
+                const config = {
+                    method: 'get',
+                    headers: { 'Authorization': 'Bearer ' + access_token },
+                    json: true
+                };
+            
+                const url = `https://api.spotify.com/v1/me`
+
+                const user = await (await fetch(url, config)).json();
+                
+                img = (user.images == []) ? 'resources/img/cover placeholder.png' : user.images[0].url ;
+                name = user.display_name;
+                user_product = user.product;
+                id = user.id;
+
+                sessionStorage.setItem('profile_pic', img);
+                sessionStorage.setItem('user_name', name);
+                sessionStorage.setItem('user_product', user_product);
+                sessionStorage.setItem('user_id', id);
+
+                const view = `
+                <div class="pic ${id}">
+                    <figure>
+                        <img src="${img}" alt="${name} profile pic">
+                    </figure>
+                    <span class="user_product ${user_product}">${user_product}</span>
+
+                </div>`;
+
+                const userDiv = document.querySelector('.user');
+                userDiv.classList.add(id)
+                userDiv.innerHTML = view;
+            }
+        }
+
+        async function getUrl(){
+            const url = window.location.origin;
+
+            await fetch("/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({redirect_uri: url + '/callback'}),
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log("Success:", data);
+                })
+                .catch((error) => {
+                    console.error("Error:", error);
+                });
+
+        }
+      
+        async function getData(){
+            const el = document.querySelector('html');
+
+            el.style.overflow = 'hidden';
+            el.style.maxHeight = '100vh';
+
+            const top_song = await getTopTrack();
+            const top_artist = await getTopArtist();
+            // const favorite_genre = await favoriteGenre();
+            const last_played = await lastPlayed();
+            await putUser();
+
+            Index.putIndexContent(top_song, top_artist, last_played);
+
+            const loader = document.querySelector('.loader');
+            loader.classList.add('hidden');
+            el.style.overflow = '';
+            el.style.maxHeight = '';
+            // await setUserId();
+
+            const playing_now_data = await getPlayingNow() 
+            Index.playing(playing_now_data);
+
+        }
+
+        window.onload = getData;
+        
+
+        async function setUserId(){
+            let user_id = document.cookie;
+
+            
+
+            if (user_id.includes('user_id')) {
+                user_id = user_id                
+                .split('; ')
+                .find(row => row.startsWith('user_id='))
+                .split('=')[1];
+                console.log('já existe id', user_id);
+                return;
+            } else{
+                console.log('não existe id');
+                const config = {
+                    method: 'get',
+                    headers: { 'Authorization': 'Bearer ' + access_token },
+                    json: true
+                };
+            
+                const url = `https://api.spotify.com/v1/me`
+
+                const user = await (await fetch(url, config)).json();
+                const id = user.id
+                               
+                document.cookie = `user_id=${id}; max-age=3600; path=/`;
+            }
+        }
+
+        
+        await setUserId();
+
+        function logout(){
+            sessionStorage.clear();
+            document.cookie = 'access_token=; max-age=0; path=/';
+            document.cookie = 'user_id=; max-age=0; path=/';
+            window.location.href = '/';
+        }
+
+        
+
+    </script>
+</body>
+
+</html>

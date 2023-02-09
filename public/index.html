@@ -27,7 +27,15 @@
             <div class="logo">
                 <h1 id="logo"><a href="/">wecharts</a></h1>
             </div>
-            <div class="user">
+            <div class="option">
+                <ul class="menu-desktop hidden">
+                    <li><a href="/me">Seu perfil</a></li>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/" class="logout">Sair</a></li>
+                    
+                </ul>
+                <div class="user">
+                </div>
             </div>
         </nav>
     </header>
@@ -42,141 +50,155 @@
         <div class="playing-box">
         </div>
         
-        <div class="main-content">
-            <a href="/my-top-artists" class="card-link">
-                <div class="card up-top-artists">
-                    <div class="card-header">
-                        <h1 class="card-title">Top Artistas</h1>
+        <div class="main-content index">
+            <div class="top-cards">
+                <a href="/my-top-artists" class="card-link">
+                    <div class="card up-top-artists">
+                        <div class="card-header">
+                            <h1 class="card-title">Top Artistas</h1>
+                        </div>
+                        <figure class="card-img">
+                            <img src="resources/img/top-artist-placeholder.png" alt="capa">
+                        </figure>
+                        <div class="card-footer">
+                            <span id="number">#1</span>
+                        </div>
                     </div>
-                    <figure class="card-img">
-                        <img src="resources/img/top-artist-placeholder.png" alt="capa">
-                    </figure>
-                    <div class="card-footer">
-                        <span id="number">#1</span>
-                    </div>
-                </div>
-            </a>
+                </a>
 
-            <a href="/my-top-songs" class="card-link">
-                <div class="card up-top-tracks">
-                    <div class="card-header">
-                        <h1 class="card-title">Top Músicas</h1>
+                <a href="/my-top-songs" class="card-link">
+                    <div class="card up-top-tracks">
+                        <div class="card-header">
+                            <h1 class="card-title">Top Músicas</h1>
+                        </div>
+                        <figure class="card-img">
+                            <img src="resources/img/candy.jpeg" alt="capa">
+                        </figure>
+                        <div class="card-footer">
+                            <span id="number">#1</span>
+                        </div>
                     </div>
-                    <figure class="card-img">
-                        <img src="resources/img/candy.jpeg" alt="capa">
-                    </figure>
-                    <div class="card-footer">
-                        <span id="number">#1</span>
-                    </div>
-                </div>
-            </a>
+                </a>
 
-            <a href="/recently-played" class="card-link">
-                <div class="card up-recently-played">
-                    <div class="card-header">
-                        <h1 class="card-title">Tocadas Recentemente</h1>
+                <a href="/recently-played" class="card-link">
+                    <div class="card up-recently-played">
+                        <div class="card-header">
+                            <h1 class="card-title">Tocadas Recentemente</h1>
+                        </div>
+                        <figure class="card-img">
+                            <img src="resources/img/res-played.png" alt="capa">
+                        </figure>
+                        <div class="card-footer">
+                            <span id="number">#1</span>
+                        </div>
                     </div>
-                    <figure class="card-img">
-                        <img src="resources/img/res-played.png" alt="capa">
-                    </figure>
-                    <div class="card-footer">
-                        <span id="number">#1</span>
-                    </div>
-                </div>
-            </a>
+                </a>
 
-            <a href="/recommendations" class="card-link">
-                <div class="card up-recommendations">
-                    <div class="card-header">
-                        <h1 class="card-title">Recomendações</h1>
+                <a href="/recommendations" class="card-link">
+                    <div class="card up-recommendations">
+                        <div class="card-header">
+                            <h1 class="card-title">Recomendações</h1>
+                        </div>
+                        <figure class="card-img">
+                            <img src="resources/img/tcc-foe.jpeg" alt="capa">
+                        </figure>
+                        <div class="card-footer">
+                            <span id="number">+10</span>
+                        </div>
                     </div>
-                    <figure class="card-img">
-                        <img src="resources/img/tcc-foe.jpeg" alt="capa">
-                    </figure>
-                    <div class="card-footer">
-                        <span id="number">+10</span>
-                    </div>
+                </a>
+            </div>
+                
+            <div class="banner">
+                <div class="banner-header">
+                    <img class="banner-logo" src="resources/img/spotify-icons-logos/logos/01_RGB/02_PNG/Spotify_Logo_RGB_White.png" alt="">
                 </div>
-            </a>
+                <div class="banner-content">
+                    
+                    <canvas src="" alt="" id="canvas"></canvas>
+                    <div class="banner-infos">
+                        <h1 class="banner-item"></h1>
+                        <p class="banner-text"></p>
+                    </div>
+                        
+                </div>
+            </div>
 
         </div>
 
         <div class="all-content">
             <h1 id="funcionalidades">Todas as funcionalidades:</h1>
 
-            <div class="card top-tracks">
-                <div class="card-header">
-                    <a href="/my-top-songs" class="card-link"><h2 class="title">Top 50 Músicas - Você</h2></a>
-                    <h3 class="subtitle">As #1 na sua casa</h3>
-                </div>
-                <div class="card-footer">
-                    <figure>
-                        <img src="resources/img/cover placeholder.png" alt="">
-                    </figure>
-                    <div class="card-infos">
-                        <span class="period">#1 nas últimas 4 semanas</span>
-                        <div class="track-data">
-                            <h4 class="track-title"></h4>
-                            <p class="track-artist"></p>
+            <div class="card-box">
+                <div class="card top-tracks">
+                    <div class="card-header">
+                        <a href="/my-top-songs" class="card-link"><h2 class="title">Top 50 Músicas - Você</h2></a>
+                        <h3 class="subtitle">As #1 na sua casa</h3>
+                    </div>
+                    <div class="card-footer">
+                        <figure>
+                            <img src="resources/img/cover placeholder.png" alt="">
+                        </figure>
+                        <div class="card-infos">
+                            <span class="period">#1 nas últimas 4 semanas</span>
+                            <div class="track-data">
+                                <h4 class="track-title"></h4>
+                                <p class="track-artist"></p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="card top-artists">
-                <div class="card-header">
-                    <a href="/my-top-artists" class="card-link"><h2 class="title">Top 50 Artistas - Você</h2></a>
-                    <h3 class="subtitle">Os melhores da (sua) crítica</h3>
-                </div>
-                <div class="card-footer">
-                    <figure>
-                        <img src="resources/img/cover placeholder.png" alt="">
-                    </figure>
-                    <div class="card-infos">
-                        <span class="period">#1 nas últimas 4 semanas</span>
-                        <div class="artist-data">
-                            <h4 class="artist-title"></h4>
+                <div class="card top-artists">
+                    <div class="card-header">
+                        <a href="/my-top-artists" class="card-link"><h2 class="title">Top 50 Artistas - Você</h2></a>
+                        <h3 class="subtitle">Os melhores da (sua) crítica</h3>
+                    </div>
+                    <div class="card-footer">
+                        <figure>
+                            <img src="resources/img/cover placeholder.png" alt="">
+                        </figure>
+                        <div class="card-infos">
+                            <span class="period">#1 nas últimas 4 semanas</span>
+                            <div class="artist-data">
+                                <h4 class="artist-title"></h4>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="card genre-msg">
-                <div class="wc-icon">
-                    <img src="resources/img/cover placeholder.png" class="icon" alt="">
-                    <span class="chat-name">wecharts</span>
-                </div>
-                <div class="messages">
-                    <div class="message">
-                        <p>Ei, eu descobri uma coisa interessante!!!</p>
+                <div class="card recently-played">
+                    <div class="card-header">
+                        <a href="/recently-played" class="card-link"><h2 class="title">Suas últimas reproduções</h2></a>
+                        <h3 class="subtitle">Veja se só você anda ouvindo na sua conta</h3>
                     </div>
-                    <div class="message">
-                        <p>Analisando aqui eu vi que o gênero que você mais escuta é...</p>
-                    </div>
-                    <div class="message">
-                        <p class="genre"></p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card recently-played">
-                <div class="card-header">
-                    <a href="/recently-played" class="card-link"><h2 class="title">Suas últimas reproduções</h2></a>
-                    <h3 class="subtitle">Veja se só você anda ouvindo na sua conta</h3>
-                </div>
-                <div class="card-footer">
-                    <figure>
-                        <img src="resources/img/cover placeholder.png" alt="">
-                    </figure>
-                    <div class="card-infos">
-                        <span class="period">Última reprodução</span>
-                        <div class="artist-data">
-                            <h4 class="recently-played-content"></h4>
-                            <p class="recently-played-artist"></p>
+                    <div class="card-footer">
+                        <figure>
+                            <img src="resources/img/cover placeholder.png" alt="">
+                        </figure>
+                        <div class="card-infos">
+                            <span class="period">Última reprodução</span>
+                            <div class="artist-data">
+                                <h4 class="recently-played-content"></h4>
+                                <p class="recently-played-artist"></p>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+                <div class="card recommendations">
+                    <div class="card-header">
+                        <a href="/recommendations" class="card-link"><h2 class="title">Veja recomendações</h2></a>
+                        <h3 class="subtitle">Crie uma playlist especial com base no que você ouve</h3>
+                    </div>
+                    <div class="card-footer">
+                        <figure>
+                            <img src="resources/img/tnc.jpeg" alt="">
+                        </figure>
+                    </div>
+                </div>
             </div>
+                
 
 
         </div>
@@ -207,19 +229,21 @@
 
 
     <script type="module" src="resources/js/index.js"></script>
-    <script type="module" src="resources/js/logic.js"></script>
+    <script type="module" src="resources/js/color.js"></script>
     <script type="module">
 
-        import Index from './resources/js/index.js';
+        import Index from './resources/js/index.js';        
+        import Color from './resources/js/color.js';
 
         // const urlParams = new URLSearchParams(window.location.search);
         //pega o access_token no cookie
         let access_token = document.cookie ? document.cookie : 'não tem cookie';
-        console.log(access_token);
+        // console.log(access_token);
 
         const main = document.querySelector('main');
         const notLogged = document.querySelector('.not-logged');
         const loader = document.querySelector('.loader');
+        const desktopMenu = document.querySelector('.menu-desktop');
 
         if (access_token === 'não tem cookie') {
             main.classList.add('hidden');
@@ -228,6 +252,7 @@
             loader.classList.add('hidden');
         }else {
             main.classList.remove('hidden');
+            desktopMenu.classList.remove('hidden');
             notLogged.classList.add('hidden');
         }
 
@@ -236,11 +261,25 @@
         .find(row => row.startsWith('access_token='))
         .split('=')[1];
 
+        const menu = document.querySelector('.menu');
 
+        const logoutBtn = document.querySelector('.logout');
+        logoutBtn.addEventListener('click', logout);
+
+                // console.log(window.innerWidth)
+        const user = document.querySelector('.user');
+        user.addEventListener('click', () => {
+            if (window.innerWidth > 614){
+                // console.log('Não vai aparecer !! 😠')
+            } else {
+                // console.log('Vai aparecer !! 😁')
+                menu.classList.toggle('hide');
+            }
+        });
 
 
   
-        console.log(access_token); 
+        // console.log(access_token); 
 
         async function getPlayingNow(){
             const config = {
@@ -252,8 +291,15 @@
             const url = `/index/playing-now`;
 
             const playing_now_data = await (await fetch(url, config)).json();
+            // console.log(playing_now_data)
 
-            return playing_now_data;
+            if (playing_now_data.is_playing) {
+                return playing_now_data;
+            } else {
+                const playing = document.querySelector('.playing-box');
+                playing.classList.add('hidden');
+                return false;
+            }
         }
 
         async function getTopTrack(){
@@ -268,7 +314,7 @@
         
 
             const top_song = await (await fetch(url, config)).json();
-            console.log(top_song)
+            // console.log(top_song)
             return top_song;
         };
 
@@ -284,20 +330,6 @@
             const top_artist = await (await fetch(url, config)).json();
 
             return top_artist;
-        };
-
-        async function favoriteGenre(){
-            const config = {
-                method: 'get',
-                headers: {
-                },
-            };
-        
-            const url = `/favorite-genres`;
-
-            const favorite_genre = await (await fetch(url, config)).json();
-
-            return favorite_genre;
         };
 
         async function lastPlayed(){
@@ -316,7 +348,7 @@
 
         async function putUser() {
 
-            console.log('iniciou');
+            // console.log('iniciou');
             let img;
             let name;
             let user_product;
@@ -351,7 +383,7 @@
 
                 const user = await (await fetch(url, config)).json();
                 
-                img = (user.images == []) ? user.images[0].url : 'resources/img/cover placeholder.png';
+                img = (user.images == []) ? 'resources/img/cover placeholder.png' : user.images[0].url ;
                 name = user.display_name;
                 user_product = user.product;
                 id = user.id;
@@ -388,14 +420,41 @@
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    console.log("Success:", data);
+                    // console.log("Success:", data);
                 })
                 .catch((error) => {
-                    console.error("Error:", error);
+                    // console.error("Error:", error);
                 });
 
         }
       
+
+        function getBanner(url, name, artist){
+            
+
+            fetch(url)
+                // .then(res => res.blob()) // Gets the response and returns it as a blob
+                .then(async blob => {
+                let objectURL = blob;
+                // main(objectURL)
+                let myImage = new Image();
+
+                const fileName = 'image.png'
+
+                const contentType = blob.headers.get('content-type')
+                const blobi = await blob.blob()
+                const file = new File([blobi], fileName, { contentType })
+                await Color.getColorPallete(file)
+                // myImage.src = objectURL;
+                // document.getElementById('myImg').appendChild(myImage)
+            });
+
+            document.querySelector('.banner-item').textContent = name;
+            document.querySelector('.banner-text').textContent = artist;
+
+        };
+
+
         async function getData(){
             const el = document.querySelector('html');
 
@@ -403,12 +462,18 @@
             el.style.maxHeight = '100vh';
 
             const top_song = await getTopTrack();
+            console.log(top_song)
+
+            const canvas = document.getElementById('canvas');
+            canvas.src = top_song.items[0].album.images[1].url;
+            getBanner(top_song.items[0].album.images[1].url, top_song.items[0].name, top_song.items[0].artists[0].name);
+
             const top_artist = await getTopArtist();
-            const favorite_genre = await favoriteGenre();
+            
             const last_played = await lastPlayed();
             await putUser();
 
-            Index.putIndexContent(top_song, top_artist, favorite_genre, last_played);
+            Index.putIndexContent(top_song, top_artist, last_played);
 
             const loader = document.querySelector('.loader');
             loader.classList.add('hidden');
@@ -462,16 +527,6 @@
             document.cookie = 'user_id=; max-age=0; path=/';
             window.location.href = '/';
         }
-
-        const menu = document.querySelector('.menu');
-
-        const logoutBtn = document.querySelector('.logout');
-        logoutBtn.addEventListener('click', logout);
-
-        const user = document.querySelector('.user');
-        user.addEventListener('click', () => {
-            menu.classList.toggle('hide');
-        });
 
     </script>
 </body>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Create color palette with Javascript" />
+    <meta
+      name="keywords"
+      content="JavaScript, Color spaces, CSS, Color palette, Color quantization"
+    />
+    <meta name="author" content="Zygimantas Sniurevicius" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create color palette</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+
+  <body>
+    <script type="module" src="./index.js"></script>
+    <h1>Color palette creator</h1>
+    <form action="#">
+      <input type="file" id="imgfile" />
+      <input type="button" id="btnLoad" value="Load" onclick="main();" />
+    </form>
+    <canvas id="canvas"></canvas>
+    <div id="palette"></div>
+    <hr />
+    <div id="complementary"></div>
+
+    <script type="module">
+
+      import Main from './index.js';
+
+      // const btnLoad = document.getElementById('btnLoad');
+      // btnLoad.addEventListener('click', main);
+
+      fetch('https://i.scdn.co/image/ab67616d0000b273aea29200523b1ee4d5b2c035')
+        // .then(res => res.blob()) // Gets the response and returns it as a blob
+        .then(async blob => {
+          let objectURL = blob;
+          // main(objectURL)
+          let myImage = new Image();
+
+          const fileName = 'image.png'
+
+          const contentType = blob.headers.get('content-type')
+          const blobi = await blob.blob()
+          const file = new File([blobi], fileName, { contentType })
+          await Main.main(file)
+          const result = await Main.getColorPallete(file)
+          console.log(result)
+          // myImage.src = objectURL;
+          // document.getElementById('myImg').appendChild(myImage)
+      });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+      </script>
+  </body>
+</html>

@@ -1,3 +1,5 @@
+import App from './app.js';
+
 const c = console;
 
 function putTopData(image, title, artist){
@@ -36,6 +38,18 @@ function putSongInfo(items){
 
     putArtists(items.artists, artist);
     putSongPopularity(items);
+}
+
+async function putPlaycount(items){
+    const playcount = document.querySelector('.playcount #category-item');
+    // const playcountSpan = document.getElementById('playcount-span');
+    // const playcountSpan2 = document.getElementById('playcount-span-2');
+
+    console.log(items.name, items.album.id)
+    const playcountData = await App.getPlaycount(items.album.id, items.track_number);
+    playcount.textContent = playcountData;
+    // playcountSpan.textContent = playcountData;
+    // playcountSpan2.textContent = playcountData;
 }
 
 function putAlbumInfo(items, trackName){
@@ -183,4 +197,4 @@ function padTo2Digits(num) {
     return num.toString().padStart(2, '0');
 }
 
-export default { putTopData, putBtns, putSongInfo, putAlbumInfo, putAudioFeatures };
+export default { putTopData, putBtns, putSongInfo, putAlbumInfo, putAudioFeatures, putPlaycount };

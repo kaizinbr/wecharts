@@ -42,8 +42,11 @@
     <main>
         <div class="container top-song">
             <div class="chart-cover">
-                <h3 id="your-top-song-is">Sua música número um é:</h3>
-                <img src="resources/img/cover placeholder.png" alt="" id="song-cover">
+                <div class="up">
+                    <h3 id="your-top-song-is">Sua música número um é:</h3>
+                    <img src="resources/img/cover placeholder.png" alt="" id="song-cover">
+                </div>
+                    
                 <div class="song-info">
                     <h1 id="song-title"></h1>
                     <h2 id="song-artist"></h2>
@@ -81,22 +84,26 @@
                         <tr>
                             <th>#</th>
                             <th colspan="2">Música</th>
+                            <th>Streams</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <!-- <tr>
+                        <tr>
                             <td>1</td>
-                            <td id="cover">
+                            <td class="cover">
                                 <div>
                                     <img src="resources/img/DittoNewJeans.jpg" alt="">
                                 </div>
                             </td>
-                            <td id="infos">
+                            <td class="infos">
                                 <h3 class="title">Ditto</h3>
                                 <h4 class="singer">NewJeans</h4>
                             </td>
+                            <td class="streams">
+                                <span class="number">1.000.000</span>
+                            </td>
                         </tr>
-                        <tr>
+                        <!-- <tr>
                             <td>2</td>
                             <td id="cover">
                                 <div>
@@ -136,7 +143,14 @@
     <script type="module">
 
         import App from './resources/js/app.js';
+        let isCacheSupported = 'caches' in window;
+        console.log(isCacheSupported);
 
+        // caches.open('cacheName').then( cache => {
+        //         cache.add('http://localhost:8080/albumPlayCount?albumid=7gkb4MxKe9rnoR3wxbJXJg').then( () => {
+        //         console.log("Data cached ")
+        //     });
+        // });
         // const urlParams = new URLSearchParams(window.location.search);
         //pega o access_token no cookie
         var access_token = document.cookie
@@ -181,11 +195,10 @@
             const url = `/construct-top-fifty-songs?time_range=${time_range}`;
 
             const topFive = await (await fetch(url, config)).json();
+            
 
             renderTopFive(topFive);
             
-            const loader = document.querySelector('.loader');
-            loader.classList.add('hidden');
         }
 
         function renderTopFive(obj){
@@ -196,10 +209,14 @@
             } else{
                 var num = obj.items.length;
                 App.putTracks(num, obj.items)
-                for (const song of obj.items){
-                    // console.log(song.name);
-                }
+                App.getPlaycount('7gkb4MxKe9rnoR3wxbJXJg', 2)
+                // for (const song of obj.items){
+                //     // console.log(song.name);
+                // }
             }
+            
+            const loader = document.querySelector('.loader');
+            loader.classList.add('hidden');
         }
 
         async function putUser() {

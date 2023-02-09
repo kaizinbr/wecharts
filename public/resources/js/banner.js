@@ -1,4 +1,6 @@
-const c = console
+const c = console;
+
+
 
 async function getBannerData(el) {
     const url = `/banner-data`;

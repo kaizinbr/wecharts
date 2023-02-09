@@ -1,27 +1,55 @@
+import Logic from './logic.js';
+
 const c = console;
 
+async function getPlaycount(albumId, trackNumber){
+    const url = `http://localhost:8080/albumPlayCount?albumid=${albumId}`;
+    const response = await fetch(url, {
+        method: 'GET'
+    });
+    const data = await response.json();
+    // Cache.put(url, response)
+
+    const playCount = (data.data.discs[0].tracks[trackNumber - 1].playcount).toLocaleString('pt-BR');
+
+    // console.log((data.data.discs[0].tracks[trackNumber - 1].playcount).toLocaleString('pt-BR'));
+    // c.log(playCount)
+
+
+    return playCount;
+}
+
 // parte das músicas
-function putTracks(num, items){
+async function putTracks(num, items){
     putTopTrack(items);
     // c.log('veio no app')
     const tabela = document.querySelector('table.songs-table tbody');
     tabela.innerHTML = '';
 
     for(let i = 0; i < num; i++){
-        const data = items[i];
+        // const data = items[i];
         const number = i + 1;
+
+        const playCount = await getPlaycount(items[i].album.id, items[i].track_number);
+
+        // if (items[i].name.length > 20) {
+        //     items[i].name = items[i].name.substring(0, 20) + '...';
+        // }
 
         const view = `
                     <tr>
                         <td>${number}</td>
-                        <td id="cover">
+                        <td class="cover">
                             <div>
                                 <img src="${items[i].album.images[0].url}" alt="${items[i].name} - ${items[i].artists[0].name}">
                             </div>
                         </td>
-                        <td id="infos">
+                        <td class="infos track">
                             <h3 class="title"><a href="/track?id=${items[i].id}">${items[i].name}</a></h3>
                             <h4 class="singer">${items[i].artists[0].name}</h4>
+                        </td>
+                        <td class="streams">
+                            <span class="number">${playCount}</span>
                         </td>
                     </tr>`
 
@@ -57,12 +85,12 @@ function putArtists(num, items){
         const view = `
                     <tr>
                         <td>${number}</td>
-                        <td id="cover">
+                        <td class="cover">
                             <div>
                                 <img src="${items[i].images[0].url}" alt="${items[0].name}">
                             </div>
                         </td>
-                        <td id="infos">
+                        <td class="infos">
                             <h3 class="title">${items[i].name}</h3>
                             <h4 class="singer">Seguidores: ${items[i].followers.total}</h4>
                         </td>
@@ -97,12 +125,12 @@ function putDateTracks(num, items){
         const view = `
                     <tr>
                         
-                        <td id="cover">
+                        <td class="cover">
                             <div>
                                 <img src="${items[i].track.album.images[0].url}" alt="${items[i].track.name} - ${items[i].track.artists[0].name}">
                             </div>
                         </td>
-                        <td id="infos">
+                        <td class="infos">
                             <h3 class="title"><a href="/track?id=${items[i].track.id}">${items[i].track.name}</a></h3>
                             <h4 class="singer">${items[i].track.artists[0].name}</h4>
                             <h2 class="played">Tocada em ${dataExata}, às ${horaExata}</h2>
@@ -137,12 +165,12 @@ function recommendations(num, obj){
         const view = `
                     <tr>
                         <td>${number}</td>
-                        <td id="cover">
+                        <td class="cover">
                             <div>
                                 <img src="${obj.tracks[i].album.images[0].url}" alt="${obj.tracks[i].name} - ${obj.tracks[i].artists[0].name}">
                             </div>
                         </td>
-                        <td id="infos">
+                        <td class="infos">
                             <h3 class="title"><a href="/track?id=${obj.tracks[i].id}" target="_blank" rel="noopener noreferrer" >${obj.tracks[i].name}</a></h3>
                             <h4 class="singer">${obj.tracks[i].artists[0].name}</h4>
                         </td>
@@ -157,4 +185,15 @@ function recommendations(num, obj){
     return uris;
 }
 
-export default { putTracks, putArtists, putDateTracks, recommendations };
+function favoriteGenre(genre){
+    if (genre === null) {
+        console.log('não tem genero favorito')
+        return;
+    } else {
+        var favoriteGenre = Logic.findGenres(genre);
+        const div = document.querySelector('.favorite-genre');
+        div.textContent = favoriteGenre;
+    }
+};
+
+export default { putTracks, putArtists, putDateTracks, recommendations, favoriteGenre, getPlaycount };

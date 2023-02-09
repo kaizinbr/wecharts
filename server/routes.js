@@ -9,6 +9,7 @@ import {fileURLToPath} from 'url';
 import cors from 'cors';
 import querystring from 'querystring';
 import cookieParser from 'cookie-parser';
+import puppeteer from 'puppeteer';
 import Logic from '../public/resources/js/logic.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -155,6 +156,7 @@ router.get('/favorite-genres', (req, res) => {
     
     // use the access token to access the Spotify Web API
     request.get(options, function(error, response, body) {
+
         res.send(body);
     });
 
@@ -253,20 +255,40 @@ router.get('/teste/recently-played', (req, res) => {
     });
 })
 
-router.get('/teste/songs', (req, res) => {
-    const access_token = 'BQA0Xz0vZPvcfJO8iB1SmuVVGgQKeXJALQQvUccUX4wlpMEDxldUAA1mhPPcjBgdo_3Qx_k654qoOuSMUy-u8eHAdasgNMR-QV5mZRm5Te0Kdjdkd8X7vftxNjMwD01Tdj8OitQDo9BwrqzTtasMmV2R1fez72761P60UMmu3yEuqVkMP11VE3bmu1pi_VXFEwaOfivQHfsWS4wNHKRcpj9jpbqmOdVH6K43NUCpP1sku_wCmHjluPnmdEUpj6R8s3Ir-cVgBy_m';
-    const ids = '7ouMYWpwJ422jRcDASZB7P,4VqPOruhp5EdPBeR92t6lQ,2takcwOaAZWiXQijPHIx7B'
-    var options = {
-        url: `https://api.spotify.com/v1/audio-features?ids=${ids}`,
-        headers: { 'Authorization': 'Bearer ' + access_token },
-        json: true
-    };
+// router.get('/teste/lyrics', (req, res) => {
+//     var options = {
+//         url: `https://www.musixmatch.com/lyrics/AURORA-66/black-water-lilies`,
+//         // headers: { 'Authorization': 'Bearer ' + access_token },
+//         // json: true
+//     };
     
-    // use the access token to access the Spotify Web API
-    request.get(options, function(error, response, body) {
-        res.send(body);
-    });
-})
+//     // use the access token to access the Spotify Web API
+//     request.get(options, function(error, response, body) {
+//         // const text = Teste.getLyrics(body)
+//         res.send(body);
+//     });
+// })
+
+
+router.get('/teste/lyrics', async (req, res) => {
+  const browser = await puppeteer.launch();
+  const page = await browser.newPage();
+  await page.goto('https://open.spotify.com/track/0rhI6gvOeCKA502RdJAbfs');
+  
+ const pageData = await page.evaluate(() => {
+    return {
+      text: document.querySelector("body").innerHTML,
+    };
+  });
+  console.log(pageData.text)
+
+  await browser.close();
+
+  res.send({
+    "text": pageData.text
+  })
+});
+
 
 router.get('/index/track', (req, res) => {
     const access_token = req.cookies.access_token;
@@ -281,6 +303,52 @@ router.get('/index/track', (req, res) => {
     
     // use the access token to access the Spotify Web API
     request.get(options, function(error, response, body) {
+        res.send(body);
+    });
+})
+
+// testar pegar play count das musicas a partir da pagina do spotify web
+router.get('/data/playcount', (req, res) => {
+    const id = req.query.albumid;
+
+    
+    var options = {
+        url: `http://localhost:8080/albumPlayCount?albumid=${id}`,
+    };
+    
+    // use the access token to access the Spotify Web API
+    request.get(options, function(error, response, body) {
+        console.log(body);
+        res.send(body);
+    });
+})
+
+
+router.get('/teste/token', (req, res) => {
+    const access_token = 'BQCCuE_fKAyxuliXj6F74uqcrEDW1hxNOvWUGdLwkFyYQ-m5XFOjeBU1F0M9RqR1cusXEWM135sB41YBN6VC5c4leJYy5BeHmRSqm4StNMCKtfSnlcUfuspxUW7GWaIHHZYZibA995ThaCYsZHYBwXD867Liuo9PnvRuGSzpIRxGfEAmS6joSJcDo0nDoFYL4O8jz3b4WXz9OnoAPQ6L-Hcma9EY-gCpATyvNtsGIYXyBsJ5GenrxhYCUnmheW4jPNASbromKOj8sgPRzQd71faOLIp9gTGt8nIqXE7pVFRt_ZK97mqd6benNA6VeQvPazv6TVcLdhPlHZI6PKqVA9zu0dZ7XQ' //req.cookies.access_token //'BQA0Xz0vZPvcfJO8iB1SmuVVGgQKeXJALQQvUccUX4wlpMEDxldUAA1mhPPcjBgdo_3Qx_k654qoOuSMUy-u8eHAdasgNMR-QV5mZRm5Te0Kdjdkd8X7vftxNjMwD01Tdj8OitQDo9BwrqzTtasMmV2R1fez72761P60UMmu3yEuqVkMP11VE3bmu1pi_VXFEwaOfivQHfsWS4wNHKRcpj9jpbqmOdVH6K43NUCpP1sku_wCmHjluPnmdEUpj6R8s3Ir-cVgBy_m';
+    const id = req.query.id;
+    console.log(id)
+    var options = {
+        url: `https://clienttoken.spotify.com/v1/clienttoken`,
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ 
+            "client_data":
+                {
+                    "client_version":"1.2.5.518.g12232155",
+                    "client_id":"d8a5ed958d274c2e8ee717e6a4b0971d",
+                    "js_sdk_data":{"device_brand":"unknown",
+                    "device_model":"desktop","os":"Windows",
+                    "os_version":"NT 10.0"}
+                }
+        })
+    };
+    
+    // use the access token to access the Spotify Web API
+    request.post(options, function(error, response, body) {
+        console.log(body);
         res.send(body);
     });
 })

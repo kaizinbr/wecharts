@@ -75,6 +75,10 @@
                         <div>
                         </div>
                     </div>
+                    <div class="info-item playcount">
+                        <span class="category">Streams totais</span>
+                        <p id="category-item"></p>
+                    </div>
                     <div class="info-item number">
                         <span class="category">Número</span>
                         <p id="category-item"></p>
@@ -217,6 +221,9 @@
     <script type="module">
 
         import Track from './resources/js/track.js';
+        import App from './resources/js/app.js';
+
+
         const c = console;
         const urlParams = new URLSearchParams(window.location.search);
         const id = urlParams.get('id'); // id da track
@@ -263,6 +270,7 @@
             Track.putTopData(obj.album.images[0].url, obj.name, obj.artists[0].name);
             Track.putBtns(obj.external_urls.spotify, obj.preview_url);
             Track.putSongInfo(obj);
+            Track.putPlaycount(obj);
         }
 
         
@@ -294,19 +302,7 @@
         await audioFeatures();
 
 
-        function renderTopFive(obj){
-            // console.log('obj é tipo: ', typeof obj)
-            if (obj === null || obj === undefined) {
-                console.log('Ocorreu um erro!')
-                return;
-            } else{
-                var num = obj.items.length;
-                App.putTracks(num, obj.items)
-                for (const song of obj.items){
-                    // console.log(song.name);
-                }
-            }
-        }
+        
 
         async function putUser() {
 

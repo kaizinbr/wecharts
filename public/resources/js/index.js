@@ -1,10 +1,9 @@
-import Logic from './logic.js';
+
 
 const c = console
 
-function putIndexContent(songObj, artistObj, genre, lastPlayedObj){
+function putIndexContent(songObj, artistObj, lastPlayedObj){
     putTopItems(songObj, artistObj);
-    favoriteGenre(genre);
     recentlyPlayed(lastPlayedObj);
 };
 
@@ -45,7 +44,7 @@ function putTopItems(songObj, artistObj){
         const songTitle = document.querySelector('.card.top-tracks .card-footer h4');
         const songArtist = document.querySelector('.card.top-tracks .card-footer p');
 
-        console.log(songObj)
+        // console.log(songObj)
 
 
         songImg.setAttribute('src', songObj.items[0].album.images[2].url);
@@ -60,12 +59,6 @@ function putTopItems(songObj, artistObj){
         artistImg.setAttribute('alt', `${artistObj.items[0].name}`);
         artistName.textContent = artistObj.items[0].name;
     }
-};
-
-function favoriteGenre(genre){
-    var favoriteGenre = Logic.findGenres(genre);
-    const div = document.querySelector('.card.genre-msg .genre');
-    div.textContent = favoriteGenre + '!!!💃';
 };
 
 function recentlyPlayed(obj){
