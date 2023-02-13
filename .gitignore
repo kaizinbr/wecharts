@@ -8,6 +8,7 @@ server/java/sp-playcount-librespot/*iml
 server/java/sp-playcount-librespot/config.toml
 server/java/sp-playcount-librespot/credentials.json
 server/java/sp-playcount-librespot/cache/
+server/java/sp-playcount-librespot
 .settings/
 .project
 .DS_Store

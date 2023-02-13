@@ -51,78 +51,120 @@
         </div>
         
         <div class="main-content index">
-            <div class="top-cards">
-                <a href="/my-top-artists" class="card-link">
-                    <div class="card up-top-artists">
-                        <div class="card-header">
-                            <h1 class="card-title">Top Artistas</h1>
-                        </div>
-                        <figure class="card-img">
-                            <img src="resources/img/top-artist-placeholder.png" alt="capa">
-                        </figure>
-                        <div class="card-footer">
-                            <span id="number">#1</span>
-                        </div>
-                    </div>
-                </a>
+            <button class="arrow-left left control" aria-label="Previous image"><span class="material-symbols-outlined left">
+                arrow_back_ios
+                </span></button>
+            <button class="arrow-right control" aria-label="Next Image"><span class="material-symbols-outlined">
+                arrow_forward_ios
+                </span></button>
+            <div class="banner-wrapper">
+                <div class="banner-box">
 
-                <a href="/my-top-songs" class="card-link">
-                    <div class="card up-top-tracks">
-                        <div class="card-header">
-                            <h1 class="card-title">Top Músicas</h1>
-                        </div>
-                        <figure class="card-img">
-                            <img src="resources/img/candy.jpeg" alt="capa">
-                        </figure>
-                        <div class="card-footer">
-                            <span id="number">#1</span>
-                        </div>
+                    <div id="top_track" class="banner current-item" style="background: radial-gradient(at 40px 40px, rgb(239, 127, 157) 0%, rgb(47, 90, 58) 100%);">
+                        <a href="/my-top-songs">
+                            <div class="banner-body">
+                                <div class="banner-header">
+                                    <img class="banner-logo" src="resources/img/spotify-icons-logos/logos/01_RGB/02_PNG/Spotify_Logo_RGB_White.png" alt="">
+                                </div>
+                                <div class="banner-content">
+                                    
+                                    <canvas src="" alt="" id="canvas"></canvas>
+                                    <div class="banner-infos">
+                                        <p class="b-title">Mais ouvida</p>
+                                        <h1 class="banner-item"></h1>
+                                        <p class="banner-text"></p>
+                                    </div>
+                                        
+                                </div>
+                            </div>
+                        </a>
                     </div>
-                </a>
 
-                <a href="/recently-played" class="card-link">
-                    <div class="card up-recently-played">
-                        <div class="card-header">
-                            <h1 class="card-title">Tocadas Recentemente</h1>
-                        </div>
-                        <figure class="card-img">
-                            <img src="resources/img/res-played.png" alt="capa">
-                        </figure>
-                        <div class="card-footer">
-                            <span id="number">#1</span>
-                        </div>
+                    <div id="top_artist" class="banner" style="background: radial-gradient(at 40px 40px, rgb(68, 95, 96) 0%, rgb(6, 9, 7) 100%);">
+                        <a href="/my-top-artists">
+                            <div class="banner-body">
+                                <div class="banner-header">
+                                    <img class="banner-logo" src="resources/img/spotify-icons-logos/logos/01_RGB/02_PNG/Spotify_Logo_RGB_White.png" alt="">
+                                </div>
+                                <div class="banner-content">
+                                    
+                                    <canvas src="" alt="" id="canvas" width="300" height="300"></canvas>
+                                    <div class="banner-infos">
+                                        <p class="b-title">Mais reproduzido</p>
+                                        <h1 class="banner-item">TOMORROW X TOGETHER</h1>
+                                        <p class="banner-text"></p>
+                                    </div>
+                                        
+                                </div>
+                            </div>
+                        </a>
                     </div>
-                </a>
-
-                <a href="/recommendations" class="card-link">
-                    <div class="card up-recommendations">
-                        <div class="card-header">
-                            <h1 class="card-title">Recomendações</h1>
-                        </div>
-                        <figure class="card-img">
-                            <img src="resources/img/tcc-foe.jpeg" alt="capa">
-                        </figure>
-                        <div class="card-footer">
-                            <span id="number">+10</span>
-                        </div>
-                    </div>
-                </a>
-            </div>
-                
-            <div class="banner">
-                <div class="banner-header">
-                    <img class="banner-logo" src="resources/img/spotify-icons-logos/logos/01_RGB/02_PNG/Spotify_Logo_RGB_White.png" alt="">
-                </div>
-                <div class="banner-content">
                     
-                    <canvas src="" alt="" id="canvas"></canvas>
-                    <div class="banner-infos">
-                        <h1 class="banner-item"></h1>
-                        <p class="banner-text"></p>
+                    <div class="banner" id="ab6ix">
+                            <div class="banner-body">
+                                <div class="banner-header">
+                                    <img class="banner-logo" src="resources/img/spotify-icons-logos/logos/01_RGB/02_PNG/Spotify_Logo_RGB_White.png" alt="">
+                                </div>
+                                <div class="banner-content">
+                                    
+                                    <img src="https://i.scdn.co/image/ab67616100005174e069abe9362512bec11f5e13" alt="" id="canvas" width="300" height="300"></img>
+                                    <div class="banner-infos">
+                                        <p class="b-title">Veja os gostos do editor</p>
+                                        <h1 class="banner-item">AB6IX</h1>
+                                        <div class="banner-link">
+                                            <a href="https://open.spotify.com/user/gvzymrsocexv6sfgx7uvxc9rj" target="_blank" rel="noopener noreferrer">Veja mais</a>
+                                            <a href="https://open.spotify.com/user/gvzymrsocexv6sfgx7uvxc9rj" target="_blank" rel="noopener noreferrer">Ouça agora</a>
+                                        </div>
+                                    </div>
+                                        
+                                </div>
+                            </div>                        
                     </div>
-                        
+                    
+                    <div class="banner" style="background: radial-gradient(at 40px 40px, #AF97C8 0%, #0D1019 100%);">
+                        <a href="https://open.spotify.com/track/6acGQH32XaeQE4pnCbzGm1?si=851fb80033204fe4">
+                            <div class="banner-body">
+                                <div class="banner-header">
+                                    <img class="banner-logo" src="resources/img/spotify-icons-logos/logos/01_RGB/02_PNG/Spotify_Logo_RGB_White.png" alt="">
+                                </div>
+                                <div class="banner-content">
+                                    
+                                    <img src="https://i.scdn.co/image/ab67616d00001e02307ba7ef1c2619eb163cc1cc" alt="" id="canvas" width="300" height="300"></img>
+                                    <div class="banner-infos">
+                                        <p class="b-title">Recomendação do editor</p>
+                                        <h1 class="banner-item">It's on you</h1>
+                                        <p class="banner-text">TEEN TEEN</p>
+                                    </div>
+                                        
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <div class="banner" style="background: radial-gradient(at 40px 40px,  #A9A1B2 0%, rgb(0, 10, 157) 100%);">
+                        <a href="https://open.spotify.com/track/60Oo6tKR0ckwZsRr95NrjL">
+                            <div class="banner-body">
+                                <div class="banner-header">
+                                    <img class="banner-logo" src="resources/img/spotify-icons-logos/logos/01_RGB/02_PNG/Spotify_Logo_RGB_White.png" alt="">
+                                </div>
+                                <div class="banner-content">
+                                    
+                                    <img src="https://i.scdn.co/image/ab67616d00001e02992cdb975f91efd91b998628" alt="" id="canvas" width="300" height="300"></img>
+                                    <div class="banner-infos">
+                                        <p class="b-title">Recomedação do editor</p>
+                                        <h1 class="banner-item">TIC TAC</h1>
+                                        <p class="banner-text">8TURN</p>
+                                    </div>
+                                        
+                                </div>
+                            </div>
+                        </a>                            
+                    </div>
+
+
                 </div>
             </div>
+                    
 
         </div>
 
@@ -205,7 +247,6 @@
         
     </main>
 
-
     <section class="not-logged hidden">
         <div class="login-box">
             <h1 id="login-title">Para continuar, faça login com sua conta do Spotify</h1>
@@ -230,10 +271,13 @@
 
     <script type="module" src="resources/js/index.js"></script>
     <script type="module" src="resources/js/color.js"></script>
+    <script src="resources/js/slider.js"></script>
+    <script type="module" src="resources/js/banner.js"></script>
     <script type="module">
 
-        import Index from './resources/js/index.js';        
+        import Index from './resources/js/index.js';
         import Color from './resources/js/color.js';
+        import Banner from './resources/js/banner.js';
 
         // const urlParams = new URLSearchParams(window.location.search);
         //pega o access_token no cookie
@@ -314,6 +358,10 @@
         
 
             const top_song = await (await fetch(url, config)).json();
+            
+
+            const div = document.querySelector('#top_track');
+            Banner.constructBanner(div, top_song.items[0].album.images[1].url, top_song.items[0].name, top_song.items[0].artists[0].name);
             // console.log(top_song)
             return top_song;
         };
@@ -328,6 +376,10 @@
             const url = `https://api.spotify.com/v1/me/top/artists?time_range=short_term&offset=0&limit=1`;
 
             const top_artist = await (await fetch(url, config)).json();
+            
+            console.log(top_artist)
+            const div = document.querySelector('#top_artist');
+            Banner.constructBanner(div, top_artist.items[0].images[1].url, top_artist.items[0].name, '');
 
             return top_artist;
         };
@@ -429,30 +481,7 @@
         }
       
 
-        function getBanner(url, name, artist){
-            
-
-            fetch(url)
-                // .then(res => res.blob()) // Gets the response and returns it as a blob
-                .then(async blob => {
-                let objectURL = blob;
-                // main(objectURL)
-                let myImage = new Image();
-
-                const fileName = 'image.png'
-
-                const contentType = blob.headers.get('content-type')
-                const blobi = await blob.blob()
-                const file = new File([blobi], fileName, { contentType })
-                await Color.getColorPallete(file)
-                // myImage.src = objectURL;
-                // document.getElementById('myImg').appendChild(myImage)
-            });
-
-            document.querySelector('.banner-item').textContent = name;
-            document.querySelector('.banner-text').textContent = artist;
-
-        };
+        
 
 
         async function getData(){
@@ -464,12 +493,11 @@
             const top_song = await getTopTrack();
             console.log(top_song)
 
-            const canvas = document.getElementById('canvas');
-            canvas.src = top_song.items[0].album.images[1].url;
-            getBanner(top_song.items[0].album.images[1].url, top_song.items[0].name, top_song.items[0].artists[0].name);
-
             const top_artist = await getTopArtist();
             
+            await Banner.recBanner(top_artist.items[0].id, top_song.items[0].id, access_token)
+
+
             const last_played = await lastPlayed();
             await putUser();
 

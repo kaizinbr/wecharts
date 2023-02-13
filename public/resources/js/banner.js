@@ -1,21 +1,53 @@
+import Color from './color.js';
+
 const c = console;
 
-
-
-async function getBannerData(el) {
-    const url = `/banner-data`;
+async function recBanner(artist, track, access_token) {
+    const url = `https://api.spotify.com/v1/recommendations?seed_artists=${artist}&seed_tracks=${track}&limit=1`;
 
     const config = {
     method: 'get',
-    headers: {},
+    headers: { 'Authorization': 'Bearer ' + access_token },
+    json: true
     }
 
     const res = await (await fetch(url, config)).json();
+    c.log(res);
 
-    for (const con of res.games){
-        createBannerView(con, el)
-    };
-    callBtns()
+    document.querySelector('.banner-box').insertAdjacentHTML('beforeend', `
+    <div id="recommendation" class="banner" style="background-image: radial-gradient(farthest-corner at 40px 40px, #14E0AA, #16202C); ">
+        
+            <div class="banner-body">
+                <div class="banner-header">
+                    <img class="banner-logo" src="resources/img/spotify-icons-logos/logos/01_RGB/02_PNG/Spotify_Logo_RGB_White.png" alt="">
+                </div>
+                <div class="banner-content">
+                    
+                    <canvas src="" alt="" id="canvas"></canvas>
+                    <div class="banner-infos">
+                        <p class="b-title">Você pode gostar de</p>
+                        <h1 class="banner-item"></h1>
+                        <p class="banner-text"></p>
+                        <div class="banner-link">
+                            <a href="/recommendations">Veja mais</a>
+                            <a href="${res.tracks[0].external_urls.spotify}" target="_blank" rel="noopener noreferrer">Ouça agora</a>
+                        </div>
+                    </div>
+                        
+                </div>
+            </div>
+    </div>`);
+    
+    const canvas = document.querySelector(`#recommendation #canvas`);
+    canvas.width = 300;
+    canvas.height = 300;
+    const ctx = canvas.getContext("2d");
+    ctx.fillStyle = '#14e0a9ff';
+    ctx.fillRect(0, 0, 300, 300);
+
+    const div = document.querySelector(`#recommendation`);
+    constructBanner(div, res.tracks[0].album.images[1].url, res.tracks[0].name, res.tracks[0].artists[0].name)
+    
 };
 
 function createBannerView(data, el) {
@@ -63,19 +95,27 @@ function createBannerView(data, el) {
     // c.log(card);
 };
 
-function callBtns(){
-    
-    var swiper = new Swiper(".banner", {
-        slidesPerView: 1,
-        autoplay: {
-            delay: 5000,
-            disableOnInteraction: true,
-        },
-        pagination: {
-            el: ".swiper-pagination",                
-            dynamicBullets: true,
-        },
-    });
-}
+function constructBanner(div, url, name, artist){
+    fetch(url)
+        // .then(res => res.blob()) // Gets the response and returns it as a blob
+        .then(async blob => {
+        let objectURL = blob;
+        // main(objectURL)
+        let myImage = new Image();
 
-export default { createBannerView, getBannerData }
+        const fileName = 'image.png'
+
+        const contentType = blob.headers.get('content-type')
+        const blobi = await blob.blob()
+        const file = new File([blobi], fileName, { contentType })
+        await Color.getColorPallete(div, file)
+    });
+
+    console.log(document.querySelector(`#${div.id} .banner-item`))
+
+    document.querySelector(`#${div.id} .banner-item`).textContent = name;
+    document.querySelector(`#${div.id} .banner-text`).textContent = artist;
+
+};
+
+export default { createBannerView, recBanner, constructBanner }

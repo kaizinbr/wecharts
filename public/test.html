@@ -1,91 +1,566 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="resources/css/index.css">
+    <link rel="stylesheet" href="resources/css/main.css">
+    <link rel="stylesheet" href="resources/css/loader.css">
+    <link rel="stylesheet" href="resources/css/user.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <title>wecharts - Seu próprio chart de música!</title>
 </head>
 <body>
-    <h1>smt</h1>
+
+    <div class="loader">
+        <div class="loading">
+            <span class="blob1 blob"></span>
+            <span class="blob2 blob"></span>
+            <span class="blob3 blob"></span>
+        </div>
+    </div>
+        
+    <header class="header">
+        <nav class="navbar">            
+            <div class="logo">
+                <h1 id="logo"><a href="/">wecharts</a></h1>
+            </div>
+            <div class="option">
+                <ul class="menu-desktop hidden">
+                    <li><a href="/me">Seu perfil</a></li>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/" class="logout">Sair</a></li>
+                    
+                </ul>
+                <div class="user">
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="menu hide">
+        <a href="/me">Seu perfil</a>
+        <a href="/">Home</a>
+        <a href="/" class="logout">Sair</a>
+    </div>
+
+    <main class="hidden">
+        <div class="playing-box">
+        </div>
+        
+        <div class="main-content index">
+            <button class="arrow-left control" aria-label="Previous image"><span class="material-symbols-outlined">
+                arrow_back_ios
+                </span></button>
+            <button class="arrow-right control" aria-label="Next Image"><span class="material-symbols-outlined">
+                arrow_forward_ios
+                </span></button>
+            <div class="banner-wrapper">
+                <div class="banner-box">
+
+                    <div class="banner current-item" style="background: radial-gradient(at 40px 40px, rgb(239, 127, 157) 0%, rgb(47, 90, 58) 100%);">
+                        <div class="banner-body">
+                            <div class="banner-header">
+                                <img class="banner-logo" src="resources/img/spotify-icons-logos/logos/01_RGB/02_PNG/Spotify_Logo_RGB_White.png" alt="">
+                            </div>
+                            <div class="banner-content">
+                                
+                                <canvas src="" alt="" id="canvas"></canvas>
+                                <div class="banner-infos">
+                                    <p class="b-title">Mais ouvida</p>
+                                    <h1 class="banner-item"></h1>
+                                    <p class="banner-text"></p>
+                                </div>
+                                    
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="banner" style="background: radial-gradient(at 40px 40px, rgb(166, 9, 62) 0%, rgb(70, 4, 26) 100%);">
+                        <div class="banner-body">
+                            <div class="banner-header">
+                                <img class="banner-logo" src="resources/img/spotify-icons-logos/logos/01_RGB/02_PNG/Spotify_Logo_RGB_White.png" alt="">
+                            </div>
+                            <div class="banner-content">
+                                
+                                <img src="https://i.scdn.co/image/ab67616d00001e02addef7fad07f17acdf7d6b98" alt="" id="canvas" width="300" height="300"></img>
+                                <div class="banner-infos">
+                                    <p class="b-title">Mais ouvida</p>
+                                    <h1 class="banner-item">Sugar Rush Ride</h1>
+                                    <p class="banner-text">TOMORROW X TOGETHER</p>
+                                </div>
+                                    
+                            </div>
+                        </div>                            
+                    </div>
+                    
+                    <div class="banner" style="background: radial-gradient(at 40px 40px, rgb(224, 121, 80) 0%, rgb(0, 0, 0) 100%);">
+                        <div class="banner-body">
+                            <div class="banner-header">
+                                <img class="banner-logo" src="resources/img/spotify-icons-logos/logos/01_RGB/02_PNG/Spotify_Logo_RGB_White.png" alt="">
+                            </div>
+                            <div class="banner-content">
+                                
+                                <img src="https://i.scdn.co/image/ab67616d00001e02ab36ff6234cbb75990aab601" alt="" id="canvas" width="300" height="300"></img>
+                                <div class="banner-infos">
+                                    <p class="b-title">Mais ouvida</p>
+                                    <h1 class="banner-item">Sugar Rush Ride</h1>
+                                    <p class="banner-text">TOMORROW X TOGETHER</p>
+                                </div>
+                                    
+                            </div>
+                        </div>                            
+                    </div>
+                    
+                    <div class="banner" style="background: radial-gradient(at 40px 40px, rgb(255, 255, 255) 0%, rgb(168, 140, 92) 100%);">
+                        <div class="banner-body">
+                            <div class="banner-header">
+                                <img class="banner-logo" src="resources/img/spotify-icons-logos/logos/01_RGB/02_PNG/Spotify_Logo_RGB_White.png" alt="">
+                            </div>
+                            <div class="banner-content">
+                                
+                                <img src="https://i.scdn.co/image/ab67616d00001e02a991995542d50a691b9ae5be" alt="" id="canvas" width="300" height="300"></img>
+                                <div class="banner-infos">
+                                    <p class="b-title">Mais ouvida</p>
+                                    <h1 class="banner-item">Sugar Rush Ride</h1>
+                                    <p class="banner-text">TOMORROW X TOGETHER</p>
+                                </div>
+                                    
+                            </div>
+                        </div>                            
+                    </div>
+                    
+                    <div class="banner" style="background: radial-gradient(at 40px 40px, rgb(47, 87, 173) 0%, rgb(0, 10, 157) 100%);">
+                        <div class="banner-body">
+                            <div class="banner-header">
+                                <img class="banner-logo" src="resources/img/spotify-icons-logos/logos/01_RGB/02_PNG/Spotify_Logo_RGB_White.png" alt="">
+                            </div>
+                            <div class="banner-content">
+                                
+                                <img src="https://i.scdn.co/image/ab67616d00001e02992cdb975f91efd91b998628" alt="" id="canvas" width="300" height="300"></img>
+                                <div class="banner-infos">
+                                    <p class="b-title">Mais ouvida</p>
+                                    <h1 class="banner-item">Sugar Rush Ride</h1>
+                                    <p class="banner-text">TOMORROW X TOGETHER</p>
+                                </div>
+                                    
+                            </div>
+                        </div>                            
+                    </div>
+
+
+                </div>
+            </div>
+                    
+
+        </div>
+
+        <div class="all-content">
+            <h1 id="funcionalidades">Todas as funcionalidades:</h1>
+
+            <div class="card-box">
+                <div class="card top-tracks">
+                    <div class="card-header">
+                        <a href="/my-top-songs" class="card-link"><h2 class="title">Top 50 Músicas - Você</h2></a>
+                        <h3 class="subtitle">As #1 na sua casa</h3>
+                    </div>
+                    <div class="card-footer">
+                        <figure>
+                            <img src="resources/img/cover placeholder.png" alt="">
+                        </figure>
+                        <div class="card-infos">
+                            <span class="period">#1 nas últimas 4 semanas</span>
+                            <div class="track-data">
+                                <h4 class="track-title"></h4>
+                                <p class="track-artist"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card top-artists">
+                    <div class="card-header">
+                        <a href="/my-top-artists" class="card-link"><h2 class="title">Top 50 Artistas - Você</h2></a>
+                        <h3 class="subtitle">Os melhores da (sua) crítica</h3>
+                    </div>
+                    <div class="card-footer">
+                        <figure>
+                            <img src="resources/img/cover placeholder.png" alt="">
+                        </figure>
+                        <div class="card-infos">
+                            <span class="period">#1 nas últimas 4 semanas</span>
+                            <div class="artist-data">
+                                <h4 class="artist-title"></h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card recently-played">
+                    <div class="card-header">
+                        <a href="/recently-played" class="card-link"><h2 class="title">Suas últimas reproduções</h2></a>
+                        <h3 class="subtitle">Veja se só você anda ouvindo na sua conta</h3>
+                    </div>
+                    <div class="card-footer">
+                        <figure>
+                            <img src="resources/img/cover placeholder.png" alt="">
+                        </figure>
+                        <div class="card-infos">
+                            <span class="period">Última reprodução</span>
+                            <div class="artist-data">
+                                <h4 class="recently-played-content"></h4>
+                                <p class="recently-played-artist"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card recommendations">
+                    <div class="card-header">
+                        <a href="/recommendations" class="card-link"><h2 class="title">Veja recomendações</h2></a>
+                        <h3 class="subtitle">Crie uma playlist especial com base no que você ouve</h3>
+                    </div>
+                    <div class="card-footer">
+                        <figure>
+                            <img src="resources/img/tnc.jpeg" alt="">
+                        </figure>
+                    </div>
+                </div>
+            </div>
+                
+
+
+        </div>
+        
+    </main>
+
+
+    <section class="not-logged hidden">
+        <div class="login-box">
+            <h1 id="login-title">Para continuar, faça login com sua conta do Spotify</h1>
+            <a href="/login" class="login-btn">Login
+                <i class='bx bxl-spotify'></i>
+            </a>
+        </div>
+
+        <div class="warn-box">
+            <h3 class="warn-title">Não se preocupe, nenhum dado pessoal seu é armazenado. Leia mais sobre como tratamos seus dados abaixo.</h3>
+            <h1 class="warn-q">Como tratamos seus dados?</h1>
+            <p class="warn-text">
+                Nós utilizamos a <a href="https://developer.spotify.com" target="_blank">Web API</a> do Spotify para obter as informações necessárias para gerar seu chart. Utilizando os <a href="https://developer.spotify.com/documentation/general/guides/authorization/scopes/" target="_blank" rel="noopener noreferrer">Escopos de Autorização</a> definidos na documentação, obtemos os dados relacionados a artistas, músicas, gêneros ouvidos e etc. Ao clicar em "Login" você será rediredionado para a página do spotify onde estão especificadas as permissões necessárias para o funcionamento desta aplicação.
+            </p>
+            <br>
+            <p class="warn-text">
+                Após o login, você será redirecionado para a página principal da aplicação, onde você poderá ver seu chart de músicas. Nenhum dado pessoal seu é armazenado, apenas o a chave de acesso gerada pelo Spotify para que possamos acessar suas informações. A chave tem validade de 1 hora e então é deletada e se torna inválida, após esse tempo, você precisará fazer login novamente.
+            </p>
+        </div>
+    </section>
+
+
+    <script type="module" src="resources/js/index.js"></script>
+    <script type="module" src="resources/js/color.js"></script>
+    <script src="resources/js/slider.js"></script>
     <script type="module">
-        let access_token = document.cookie 
+
+        import Index from './resources/js/index.js';        
+        import Color from './resources/js/color.js';
+
+        // const urlParams = new URLSearchParams(window.location.search);
+        //pega o access_token no cookie
+        let access_token = document.cookie ? document.cookie : 'não tem cookie';
+        // console.log(access_token);
+
+        const main = document.querySelector('main');
+        const notLogged = document.querySelector('.not-logged');
+        const loader = document.querySelector('.loader');
+        const desktopMenu = document.querySelector('.menu-desktop');
+
+        if (access_token === 'não tem cookie') {
+            main.classList.add('hidden');
+            await getUrl()
+            notLogged.classList.remove('hidden');            
+            loader.classList.add('hidden');
+        }else {
+            main.classList.remove('hidden');
+            desktopMenu.classList.remove('hidden');
+            notLogged.classList.add('hidden');
+        }
+
+        access_token = access_token
         .split('; ')
         .find(row => row.startsWith('access_token='))
         .split('=')[1];
-        console.log(access_token);
+
+        const menu = document.querySelector('.menu');
+
+        const logoutBtn = document.querySelector('.logout');
+        logoutBtn.addEventListener('click', logout);
+
+                // console.log(window.innerWidth)
+        const user = document.querySelector('.user');
+        user.addEventListener('click', () => {
+            if (window.innerWidth > 614){
+                // console.log('Não vai aparecer !! 😠')
+            } else {
+                // console.log('Vai aparecer !! 😁')
+                menu.classList.toggle('hide');
+            }
+        });
 
 
-    //     async function getToken() {
-    //     var token;
-    //     fetch('https://clienttoken.spotify.com/v1/clienttoken', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Accept': 'application/json',
-    //             'Content-Type': 'application/json'
-    //         },
-    //         body: JSON.stringify({ 
-    //             "client_data":
-    //                 {
-    //                     "client_version":"1.2.5.518.g12232155",
-    //                     "client_id":"d8a5ed958d274c2e8ee717e6a4b0971d",
-    //                     "js_sdk_data":{"device_brand":"unknown",
-    //                     "device_model":"desktop","os":"Windows",
-    //                     "os_version":"NT 10.0"}
-    //                 }
-    //         })
-    //     })
-    //     .then(response => response.json())
-    //     .then(response => console.log(JSON.stringify(response.granted_token.token)))
-    //     .then(response => token = response);
-        
-    //     return token;
-    //   }
+  
+        // console.log(access_token); 
 
-        async function getToken(){
+        async function getPlayingNow(){
             const config = {
                 method: 'get',
                 headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                }
-            };
-        
-            const url = `https://open.spotify.com/get_access_token`;
-
-            const token = await (await fetch(url, config)).json();
-            // console.log(token.granted_token.token);
-
-            return token.accessToken;
-        }
-        
-        const token = await getToken();
-        console.log(token);
-
-        const id = '1AFVTHHm7kKoQ6Rgb25x3p';
-        async function getData(clientToken){
-            const config = {
-                method: 'get',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + access_token
                 },
-                client_token: clientToken
             };
         
-            const url = `https://api-partner.spotify.com/pathfinder/v1/query?operationName=getTrack&variables=%7B%22uri%22%3A%22spotify%3Atrack%3A${id}%22%7D&extensions=%7B%22persistedQuery%22%3A%7B%22version%22%3A1%2C%22sha256Hash%22%3A%226af75b996d93636e4f1980c170f1171a457bf936f47d6ee1e38f57671d3ae7bd%22%7D%7D`;
+            const url = `/index/playing-now`;
 
-            const artistData = await (await fetch(url, config)).json();
-            console.log(artistData);
+            const playing_now_data = await (await fetch(url, config)).json();
+            // console.log(playing_now_data)
 
-            return artistData;
+            if (playing_now_data.is_playing) {
+                return playing_now_data;
+            } else {
+                const playing = document.querySelector('.playing-box');
+                playing.classList.add('hidden');
+                return false;
+            }
         }
 
-        const artistData = await getData(token);
-        console.log(artistData);
+        async function getTopTrack(){
         
+            const url = `https://api.spotify.com/v1/me/top/tracks?time_range=short_term&offset=0&limit=1`;
+
+            const config = {
+                method: 'get',
+                headers: { 'Authorization': 'Bearer ' + access_token },
+                json: true
+            };
+        
+
+            const top_song = await (await fetch(url, config)).json();
+            // console.log(top_song)
+            return top_song;
+        };
+
+        async function getTopArtist(){
+            const config = {
+                method: 'get',
+                headers: { 'Authorization': 'Bearer ' + access_token },
+                json: true
+            };
+        
+            const url = `https://api.spotify.com/v1/me/top/artists?time_range=short_term&offset=0&limit=1`;
+
+            const top_artist = await (await fetch(url, config)).json();
+
+            return top_artist;
+        };
+
+        async function lastPlayed(){
+            const config = {
+                method: 'get',
+                headers: { 'Authorization': 'Bearer ' + access_token },
+                json: true
+            };
+        
+            const url = `https://api.spotify.com/v1/me/player/recently-played?offset=0&limit=50`;
+
+            const last_played = await (await fetch(url, config)).json();
+
+            return last_played;
+        }
+
+        async function putUser() {
+
+            // console.log('iniciou');
+            let img;
+            let name;
+            let user_product;
+            let id;
+
+            img = sessionStorage.getItem('profile_pic');
+            name = sessionStorage.getItem('user_name');
+            user_product = sessionStorage.getItem('user_product');
+            id = sessionStorage.getItem('user_id');
+
+            if(img && name && user_product && id){
+                const view = `
+                <div class="pic ${id}">
+                    <figure>
+                        <img src="${img}" alt="${name} profile pic">
+                    </figure>
+                    <span class="user_product ${user_product}">${user_product}</span>
+                </div>`;
+
+                const userDiv = document.querySelector('.user');
+                userDiv.classList.add(id)
+                userDiv.innerHTML = view;
+                return;
+            } else {
+                const config = {
+                    method: 'get',
+                    headers: { 'Authorization': 'Bearer ' + access_token },
+                    json: true
+                };
+            
+                const url = `https://api.spotify.com/v1/me`
+
+                const user = await (await fetch(url, config)).json();
+                
+                img = (user.images == []) ? 'resources/img/cover placeholder.png' : user.images[0].url ;
+                name = user.display_name;
+                user_product = user.product;
+                id = user.id;
+
+                sessionStorage.setItem('profile_pic', img);
+                sessionStorage.setItem('user_name', name);
+                sessionStorage.setItem('user_product', user_product);
+                sessionStorage.setItem('user_id', id);
+
+                const view = `
+                <div class="pic ${id}">
+                    <figure>
+                        <img src="${img}" alt="${name} profile pic">
+                    </figure>
+                    <span class="user_product ${user_product}">${user_product}</span>
+
+                </div>`;
+
+                const userDiv = document.querySelector('.user');
+                userDiv.classList.add(id)
+                userDiv.innerHTML = view;
+            }
+        }
+
+        async function getUrl(){
+            const url = window.location.origin;
+
+            await fetch("/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({redirect_uri: url + '/callback'}),
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    // console.log("Success:", data);
+                })
+                .catch((error) => {
+                    // console.error("Error:", error);
+                });
+
+        }
       
+
+        function getBanner(url, name, artist){
+            
+
+            fetch(url)
+                // .then(res => res.blob()) // Gets the response and returns it as a blob
+                .then(async blob => {
+                let objectURL = blob;
+                // main(objectURL)
+                let myImage = new Image();
+
+                const fileName = 'image.png'
+
+                const contentType = blob.headers.get('content-type')
+                const blobi = await blob.blob()
+                const file = new File([blobi], fileName, { contentType })
+                await Color.getColorPallete(file)
+                // myImage.src = objectURL;
+                // document.getElementById('myImg').appendChild(myImage)
+            });
+
+            document.querySelector('.banner-item').textContent = name;
+            document.querySelector('.banner-text').textContent = artist;
+
+        };
+
+
+        async function getData(){
+            const el = document.querySelector('html');
+
+            el.style.overflow = 'hidden';
+            el.style.maxHeight = '100vh';
+
+            const top_song = await getTopTrack();
+            console.log(top_song)
+
+            const canvas = document.getElementById('canvas');
+            canvas.src = top_song.items[0].album.images[1].url;
+            getBanner(top_song.items[0].album.images[1].url, top_song.items[0].name, top_song.items[0].artists[0].name);
+
+            const top_artist = await getTopArtist();
+            
+            const last_played = await lastPlayed();
+            await putUser();
+
+            Index.putIndexContent(top_song, top_artist, last_played);
+
+            const loader = document.querySelector('.loader');
+            loader.classList.add('hidden');
+            el.style.overflow = '';
+            el.style.maxHeight = '';
+            // await setUserId();
+
+            const playing_now_data = await getPlayingNow() 
+            Index.playing(playing_now_data);
+
+        }
+
+        window.onload = getData;
+        
+
+        async function setUserId(){
+            let user_id = document.cookie;
+
+            
+
+            if (user_id.includes('user_id')) {
+                user_id = user_id                
+                .split('; ')
+                .find(row => row.startsWith('user_id='))
+                .split('=')[1];
+                console.log('já existe id', user_id);
+                return;
+            } else{
+                console.log('não existe id');
+                const config = {
+                    method: 'get',
+                    headers: { 'Authorization': 'Bearer ' + access_token },
+                    json: true
+                };
+            
+                const url = `https://api.spotify.com/v1/me`
+
+                const user = await (await fetch(url, config)).json();
+                const id = user.id
+                               
+                document.cookie = `user_id=${id}; max-age=3600; path=/`;
+            }
+        }
+
+        
+        await setUserId();
+
+        function logout(){
+            sessionStorage.clear();
+            document.cookie = 'access_token=; max-age=0; path=/';
+            document.cookie = 'user_id=; max-age=0; path=/';
+            window.location.href = '/';
+        }
+
     </script>
 </body>
+
 </html>

@@ -364,10 +364,9 @@ const main = (imgfile) => {
   fileReader.readAsDataURL(file);
 };
 
-const buildPaletteArr = async (colorsList) => {
+const buildPaletteArr = async (colorsList, div) => {
 
   const orderedByColor = await orderByLuminance(colorsList);
-  console.log(orderedByColor);
 
   let arr = [];
 
@@ -377,17 +376,36 @@ const buildPaletteArr = async (colorsList) => {
   }
   console.log(arr)
   
-  const bannerBg = document.querySelector(".main-content");
+  // const bannerBg = document.querySelector(".banner");
 
-  const firstColor = (arr[Math.round(arr.length / 2)] == arr[arr.length - 1]) ? arr[0] : arr[Math.round(arr.length / 2)];
+  const firstColor = (arr[Math.round(arr.length / 2)] == arr[arr.length - 1]) ? arr[0] : arr[Math.round(arr.length / 3)];
   const lastColor = arr[arr.length - 1];
 
-  bannerBg.style.background = `linear-gradient(45deg, ${firstColor} 0%, ${lastColor} 100%)`;
-  bannerBg.style.backgroundImage = `radial-gradient(farthest-corner at 40px 40px, ${firstColor} 0%, ${lastColor} 100%)`;
+  if(document.querySelector(`#${div.id} .banner-link`)){
+    console.log('tem link')
+
+    const links = document.querySelectorAll(`#${div.id} .banner-link a`);
+    links.forEach(link => {
+      link.style.color = `${lastColor}`;
+      link.addEventListener('mouseover', () => {
+        link.style.backgroundColor = `${lastColor}`;
+        link.style.color = `$var(--white-text)`;
+      });
+      link.addEventListener('mouseout', () => {
+        link.style.backgroundColor = 'var(--white-text)';
+        link.style.color = `${lastColor}`;
+      });
+    });
+   }
+
+  div.style.background = `linear-gradient(45deg, ${firstColor} 0%, ${lastColor} 100%)`;
+  div.style.backgroundImage = `radial-gradient(farthest-corner at 40px 40px, ${firstColor} 0%, ${lastColor} 100%)`;
 };
 
-const getColorPallete = async (imgfile) => {
+const getColorPallete = async (div, imgfile) => {
   const imgFile = imgfile;
+  const el = div;
+  console.log(el,'é o elemento')
 
   const image = new Image();
   // console.log(image)
@@ -404,9 +422,9 @@ const getColorPallete = async (imgfile) => {
   fileReader.onload = async() => {
     image.onload = async () => {
       // Set the canvas size to be the same as of the uploaded image
-      const canvas = document.getElementById("canvas");
-      canvas.width = image.width;
-      canvas.height = image.height;
+      const canvas = document.querySelector(`#${div.id} #canvas`);
+      canvas.width = 300;
+      canvas.height = 300;
       const ctx = canvas.getContext("2d");
       ctx.drawImage(image, 0, 0);
 
@@ -417,7 +435,6 @@ const getColorPallete = async (imgfile) => {
        * the alpha is not from 0 to 1 like it is in the RGBA of CSS, but from 0 to 255.
        */
       const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-      console.log('veio aqui')
 
 
       // Convert the image data to RGB values so its much simpler
@@ -432,10 +449,9 @@ const getColorPallete = async (imgfile) => {
       const quantColors = await quantization(rgbArray, 0);
       console.log(quantColors);
       // Create the HTML structure to show the color palette
-      arr = await buildPaletteArr(quantColors);
+      arr = await buildPaletteArr(quantColors, div);
     };
     image.src = fileReader.result;
-    console.log(arr)
   };
   fileReader.readAsDataURL(file);
 };
