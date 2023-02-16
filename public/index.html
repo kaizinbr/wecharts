@@ -271,30 +271,29 @@
 
     <script type="module" src="resources/js/index.js"></script>
     <script type="module" src="resources/js/color.js"></script>
+    <script type="module" src="resources/js/user.js"></script>
     <script src="resources/js/slider.js"></script>
-    <script type="module" src="resources/js/banner.js"></script>
     <script type="module">
 
         import Index from './resources/js/index.js';
-        import Color from './resources/js/color.js';
-        import Banner from './resources/js/banner.js';
 
-        // const urlParams = new URLSearchParams(window.location.search);
         //pega o access_token no cookie
         let access_token = document.cookie ? document.cookie : 'não tem cookie';
-        // console.log(access_token);
 
+        // confere se o usuário está logado ou não e adciona o cookie
         const main = document.querySelector('main');
         const notLogged = document.querySelector('.not-logged');
         const loader = document.querySelector('.loader');
         const desktopMenu = document.querySelector('.menu-desktop');
 
+        // é importante checar porque senão ele adiciona o token de novo 
         if (access_token === 'não tem cookie') {
+            console.log('Parece que não temos seu token ainda... 😕')
             main.classList.add('hidden');
-            await getUrl()
             notLogged.classList.remove('hidden');            
             loader.classList.add('hidden');
-        }else {
+        } else {            
+            console.log(`O seu token de acesso é ${access_token}`)
             main.classList.remove('hidden');
             desktopMenu.classList.remove('hidden');
             notLogged.classList.add('hidden');
@@ -310,227 +309,59 @@
         const logoutBtn = document.querySelector('.logout');
         logoutBtn.addEventListener('click', logout);
 
-                // console.log(window.innerWidth)
         const user = document.querySelector('.user');
         user.addEventListener('click', () => {
             if (window.innerWidth > 614){
-                // console.log('Não vai aparecer !! 😠')
+                console.log('Não vai aparecer !! 😠')
             } else {
-                // console.log('Vai aparecer !! 😁')
+                console.log('Vai aparecer !! 😁')
                 menu.classList.toggle('hide');
             }
         });
-
-
-  
-        // console.log(access_token); 
-
-        async function getPlayingNow(){
-            const config = {
-                method: 'get',
-                headers: {
-                },
-            };
         
-            const url = `/index/playing-now`;
+        // async function getUrl(){
+        //     const url = window.location.origin;
 
-            const playing_now_data = await (await fetch(url, config)).json();
-            // console.log(playing_now_data)
+        //     await fetch("/login", {
+        //         method: "POST",
+        //         headers: {
+        //             "Content-Type": "application/json",
+        //         },
+        //         body: JSON.stringify({redirect_uri: url + '/callback'}),
+        //     })
+        //         .then((response) => response.json())
+        //         .then((data) => {
+        //             console.log("Sucesso a:", data);
+        //         })
+        //         .catch((error) => {
+        //             console.error("Error:", error);
+        //         });
 
-            if (playing_now_data.is_playing) {
-                return playing_now_data;
-            } else {
-                const playing = document.querySelector('.playing-box');
-                playing.classList.add('hidden');
-                return false;
-            }
-        }
-
-        async function getTopTrack(){
-        
-            const url = `https://api.spotify.com/v1/me/top/tracks?time_range=short_term&offset=0&limit=1`;
-
-            const config = {
-                method: 'get',
-                headers: { 'Authorization': 'Bearer ' + access_token },
-                json: true
-            };
-        
-
-            const top_song = await (await fetch(url, config)).json();
-            
-
-            const div = document.querySelector('#top_track');
-            Banner.constructBanner(div, top_song.items[0].album.images[1].url, top_song.items[0].name, top_song.items[0].artists[0].name);
-            // console.log(top_song)
-            return top_song;
-        };
-
-        async function getTopArtist(){
-            const config = {
-                method: 'get',
-                headers: { 'Authorization': 'Bearer ' + access_token },
-                json: true
-            };
-        
-            const url = `https://api.spotify.com/v1/me/top/artists?time_range=short_term&offset=0&limit=1`;
-
-            const top_artist = await (await fetch(url, config)).json();
-            
-            console.log(top_artist)
-            const div = document.querySelector('#top_artist');
-            Banner.constructBanner(div, top_artist.items[0].images[1].url, top_artist.items[0].name, '');
-
-            return top_artist;
-        };
-
-        async function lastPlayed(){
-            const config = {
-                method: 'get',
-                headers: { 'Authorization': 'Bearer ' + access_token },
-                json: true
-            };
-        
-            const url = `https://api.spotify.com/v1/me/player/recently-played?offset=0&limit=50`;
-
-            const last_played = await (await fetch(url, config)).json();
-
-            return last_played;
-        }
-
-        async function putUser() {
-
-            // console.log('iniciou');
-            let img;
-            let name;
-            let user_product;
-            let id;
-
-            img = sessionStorage.getItem('profile_pic');
-            name = sessionStorage.getItem('user_name');
-            user_product = sessionStorage.getItem('user_product');
-            id = sessionStorage.getItem('user_id');
-
-            if(img && name && user_product && id){
-                const view = `
-                <div class="pic ${id}">
-                    <figure>
-                        <img src="${img}" alt="${name} profile pic">
-                    </figure>
-                    <span class="user_product ${user_product}">${user_product}</span>
-                </div>`;
-
-                const userDiv = document.querySelector('.user');
-                userDiv.classList.add(id)
-                userDiv.innerHTML = view;
-                return;
-            } else {
-                const config = {
-                    method: 'get',
-                    headers: { 'Authorization': 'Bearer ' + access_token },
-                    json: true
-                };
-            
-                const url = `https://api.spotify.com/v1/me`
-
-                const user = await (await fetch(url, config)).json();
-                
-                img = (user.images == []) ? 'resources/img/cover placeholder.png' : user.images[0].url ;
-                name = user.display_name;
-                user_product = user.product;
-                id = user.id;
-
-                sessionStorage.setItem('profile_pic', img);
-                sessionStorage.setItem('user_name', name);
-                sessionStorage.setItem('user_product', user_product);
-                sessionStorage.setItem('user_id', id);
-
-                const view = `
-                <div class="pic ${id}">
-                    <figure>
-                        <img src="${img}" alt="${name} profile pic">
-                    </figure>
-                    <span class="user_product ${user_product}">${user_product}</span>
-
-                </div>`;
-
-                const userDiv = document.querySelector('.user');
-                userDiv.classList.add(id)
-                userDiv.innerHTML = view;
-            }
-        }
-
-        async function getUrl(){
-            const url = window.location.origin;
-
-            await fetch("/login", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({redirect_uri: url + '/callback'}),
-            })
-                .then((response) => response.json())
-                .then((data) => {
-                    // console.log("Success:", data);
-                })
-                .catch((error) => {
-                    // console.error("Error:", error);
-                });
-
-        }
+        // }
       
+        const el = document.querySelector('html');
 
+        el.style.overflow = 'hidden';
+        el.style.maxHeight = '100vh';
+
+        await Index.up(access_token);
         
-
-
-        async function getData(){
-            const el = document.querySelector('html');
-
-            el.style.overflow = 'hidden';
-            el.style.maxHeight = '100vh';
-
-            const top_song = await getTopTrack();
-            console.log(top_song)
-
-            const top_artist = await getTopArtist();
-            
-            await Banner.recBanner(top_artist.items[0].id, top_song.items[0].id, access_token)
-
-
-            const last_played = await lastPlayed();
-            await putUser();
-
-            Index.putIndexContent(top_song, top_artist, last_played);
-
-            const loader = document.querySelector('.loader');
-            loader.classList.add('hidden');
-            el.style.overflow = '';
-            el.style.maxHeight = '';
-            // await setUserId();
-
-            const playing_now_data = await getPlayingNow() 
-            Index.playing(playing_now_data);
-
-        }
-
-        window.onload = getData;
-        
+        loader.classList.add('hidden');
+        el.style.overflow = '';
+        el.style.maxHeight = '';    
 
         async function setUserId(){
-            let user_id = document.cookie;
-
-            
+            let user_id = document.cookie;            
 
             if (user_id.includes('user_id')) {
                 user_id = user_id                
                 .split('; ')
                 .find(row => row.startsWith('user_id='))
                 .split('=')[1];
-                console.log('já existe id', user_id);
+                console.log('O seu ID é', user_id);
                 return;
             } else{
-                console.log('não existe id');
+                console.log('Não temos seu ID ainda... É melhor salvarmos logo');
                 const config = {
                     method: 'get',
                     headers: { 'Authorization': 'Bearer ' + access_token },
@@ -545,7 +376,6 @@
                 document.cookie = `user_id=${id}; max-age=3600; path=/`;
             }
         }
-
         
         await setUserId();
 

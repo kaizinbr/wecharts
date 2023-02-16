@@ -12,7 +12,7 @@ async function recBanner(artist, track, access_token) {
     }
 
     const res = await (await fetch(url, config)).json();
-    c.log(res);
+    // c.log(res);
 
     document.querySelector('.banner-box').insertAdjacentHTML('beforeend', `
     <div id="recommendation" class="banner" style="background-image: radial-gradient(farthest-corner at 40px 40px, #14E0AA, #16202C); ">
@@ -111,7 +111,7 @@ function constructBanner(div, url, name, artist){
         await Color.getColorPallete(div, file)
     });
 
-    console.log(document.querySelector(`#${div.id} .banner-item`))
+    console.log('Construindo seus banners exclusivos...');
 
     document.querySelector(`#${div.id} .banner-item`).textContent = name;
     document.querySelector(`#${div.id} .banner-text`).textContent = artist;

@@ -45,7 +45,7 @@ app.use('/', router);
 
 var client_id = 'cc0b2308c9764162bd781deed153abf1'; // Your client id
 var client_secret = 'dc43ce24f0e7466fab83ca4bd45018f8'; // Your secret
-var redirect_uri; //=  'http://localhost:3000/callback''https://wecharts.onrender.com/callback'; // Your redirect uri
+var redirect_uri =  'http://localhost:3000/callback' //'https://wecharts.onrender.com/callback'; // Your redirect uri
 
 var access_token;
 var refresh_token;
@@ -68,13 +68,14 @@ var generateRandomString = function(length) {
 
 var stateKey = 'spotify_auth_state';
 
-app.post('/login', function(req, res) {
+// Usei isso pro caso de precisar hospedar o site em outro lugar, então ele pega a url do site e coloca no redirect_uri (mas a url precisa estar salva no dashboard do spotify)
+// app.post('/login', function(req, res) {
 
-  redirect_uri = req.body.redirect_uri;
+//   redirect_uri = req.body.redirect_uri;
 
-  // your application requests authorization
-  res.send({sucess: 'tudo certo, pode ir para o login'})
-});
+//   // your application requests authorization
+//   res.send({sucess: 'tudo certo, pode ir para o login'})
+// });
 
 app.get('/login', function(req, res) {
 

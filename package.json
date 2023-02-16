@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "NODE_ENV=production node server/index.js",
     "main": "nodemon server/index.js",
-    "api": "java -jar server/java/sp-playcount-librespot/core/target/librespot-core-jar-with-dependencies.jar",
+    "api": "java -jar java/sp-playcount-librespot/core/target/librespot-core-jar-with-dependencies.jar",
     "dev": "run-p main api",
     "db:up": "node server/database/load.js",
     "db:down": "rm server/database/db.sqlite"

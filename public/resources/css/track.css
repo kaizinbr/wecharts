@@ -54,6 +54,13 @@ h2#song-artist {
     color: var(--medium-aquamarine);
 }
 
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+}
+
 .box {
     width: 100%;
     height: auto;
@@ -167,11 +174,20 @@ h2#song-artist {
     color: var(--background);
 }
 
+@media (min-width: 660px){
+    
+
+}
+
 
 @media (min-width: 992px)  {  
     .song-cover{
         width: 300px;
         height: 300px;
+    }
+    
+    .container {
+        flex-direction: row;
     }
     
     .container.song {
@@ -185,5 +201,17 @@ h2#song-artist {
     .btns {
         justify-content: start;
         gap: 1rem;
+    }
+
+    .box {
+        width: 50%;
+        height: auto;
+        border-radius: 10px;
+        padding: 1rem;
+        overflow: hidden;
+        box-shadow: 7px 5px 25px 0 rgba(0,0,0,0.2);
+        background-color: rgba(22, 22, 32, 0.3);
+        backdrop-filter: blur(20px);
+        border: 1px solid var(--border-2);
     }
 }

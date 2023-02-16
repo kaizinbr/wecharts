@@ -32,14 +32,14 @@ const buildPalette = async (colorsList) => {
   complementaryContainer.innerHTML = "";
 
   const orderedByColor = orderByLuminance(colorsList);
-  console.log(colorsList);
+  // console.log(colorsList);
   const hslColors = convertRGBtoHSL(orderedByColor);
 
   let arr = [];
 
   for (let i = 0; i < orderedByColor.length; i++) {
     const hexColor = rgbToHex(orderedByColor[i]);
-    console.log(hexColor)
+    // console.log(hexColor)
     arr.push(hexColor);
 
     const hexColorComplementary = hslToHex(hslColors[i]);
@@ -74,7 +74,7 @@ const buildPalette = async (colorsList) => {
   }
   
   let n = arr.length;
-  console.log(mostFrequent(arr, n));
+  // console.log(mostFrequent(arr, n));
 };
 
 //  Convert each pixel value ( number ) to hexadecimal ( string ) with base 16
@@ -317,14 +317,14 @@ const quantization = async (rgbValues, depth) => {
 
 const main = (imgfile) => {
   const imgFile = imgfile
-  console.log(imgFile)
+  // console.log(imgFile)
 
   const image = new Image();
-  console.log(image)
+  // console.log(image)
 
   const file = imgFile;
 
-  console.log(file)
+  // console.log(file)
 
   const fileReader = new FileReader();
 
@@ -374,7 +374,7 @@ const buildPaletteArr = async (colorsList, div) => {
     const hexColor = await rgbToHex(orderedByColor[i]);
     arr.push(hexColor);
   }
-  console.log(arr)
+  // console.log(arr)
   
   // const bannerBg = document.querySelector(".banner");
 
@@ -382,7 +382,7 @@ const buildPaletteArr = async (colorsList, div) => {
   const lastColor = arr[arr.length - 1];
 
   if(document.querySelector(`#${div.id} .banner-link`)){
-    console.log('tem link')
+    // console.log('tem link')
 
     const links = document.querySelectorAll(`#${div.id} .banner-link a`);
     links.forEach(link => {
@@ -405,7 +405,7 @@ const buildPaletteArr = async (colorsList, div) => {
 const getColorPallete = async (div, imgfile) => {
   const imgFile = imgfile;
   const el = div;
-  console.log(el,'é o elemento')
+  // console.log(el,'é o elemento')
 
   const image = new Image();
   // console.log(image)
@@ -447,7 +447,7 @@ const getColorPallete = async (div, imgfile) => {
        */
       
       const quantColors = await quantization(rgbArray, 0);
-      console.log(quantColors);
+      // console.log(quantColors);
       // Create the HTML structure to show the color palette
       arr = await buildPaletteArr(quantColors, div);
     };
